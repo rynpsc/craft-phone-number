@@ -1,0 +1,161 @@
+@import "node_modules/craftcms-sass/src/mixins";
+
+$prefix: "rynpsc-phonenumber";
+
+.#{$prefix} {
+    position: relative;
+    display: block;
+    display: flex;
+}
+
+.#{$prefix}-assistive {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+.#{$prefix}-flag {
+    @include margin-right(14px);
+    display: inline-block;
+}
+
+.#{$prefix}.has-errors .#{$prefix}-button,
+.#{$prefix}.has-errors .#{$prefix}-number {
+    border-color: $errorColor;
+}
+
+.#{$prefix}-button {
+    @include margin-right(7px);
+    display: flex;
+	align-items: center;
+	padding: 7px;
+    appearance: none;
+
+    background: transparent;
+    width: 54px;
+    border: 1px solid $hairlineColorAlpha;
+    border-radius: $textBorderRadius;
+    font-size: 14px;
+    color: $textColor;
+    height: 32px;
+    position: relative;
+
+    &:focus,
+    &.active {
+        outline: 0;
+        border-color: $blue;
+    }
+}
+
+.#{$prefix}-button-caret {
+    @include icon;
+    @include margin-left(auto);
+    z-index: 1;
+    font-size: 14px;
+    display: block;
+}
+
+.#{$prefix}-dropdown {
+	@include menu-styles;
+
+	position: fixed;
+    top: calc(100% + 7px);
+    top: 12px;
+    bottom: 12px;
+    left: 12px;
+    right: 12px;
+	overflow: hidden;
+
+	display: none;
+	padding: 0;
+
+	&.is-open {
+		display: block;
+	}
+
+	&:focus {
+		outline: 0;
+    }
+}
+
+.#{$prefix}-search {
+    padding: 14px;
+    border-bottom: 1px solid $hairlineColorAlpha;
+}
+
+.#{$prefix}-regions {
+    height: 100%;
+	overflow-y: scroll;
+	overscroll-behavior: contain;
+	position: relative;
+
+	&::-webkit-scrollbar {
+		width: 8px;
+	}
+
+	&::-webkit-scrollbar-thumb {
+        background: $hairlineColorAlpha;
+	}
+}
+
+.#{$prefix}-region {
+	@include menu-option-styles();
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	margin: 0;
+	padding-top: 8px;
+	padding-bottom: 8px;
+	font-size: 12px;
+
+	&.is-selected,
+	&.is-highlighted {
+		@include menu-option-active-styles();
+	}
+}
+
+.#{$prefix}-country {
+    @include margin-right(7px);
+}
+
+.#{$prefix}-code {
+    @include margin-left(auto);
+    color: $mediumTextColor;
+}
+
+.#{$prefix}-no-results {
+	display: none;
+	font-size: 14px;
+	padding: 14px;
+
+	&.is-visible {
+		display: block;
+	}
+}
+
+
+@media only screen and (min-width: 673px) {
+    .#{$prefix}-dropdown {
+        position: absolute;
+        top: calc(100% + 7px);
+        bottom: auto;
+        left: 0;
+        right: auto;
+        min-width: 340px;
+    }
+
+    .#{$prefix}-dropdown.above {
+        top: auto;
+        bottom: calc(100% + 7px);
+    }
+
+    .#{$prefix}-regions {
+        max-height: 252px;
+    }
+}

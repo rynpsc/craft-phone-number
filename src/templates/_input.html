@@ -1,0 +1,59 @@
+{% import "_includes/forms" as forms %}
+
+<div id="{{ id }}" class="rynpsc-phonenumber {{ element.getErrors(field.handle) ? 'has-errors' : '' }}">
+
+    <div style="display: none;">
+        {{ forms.selectField({
+            id: id ~ "-region",
+            label: "Region"|t("phone-number"),
+            name: name ~ "[region]",
+            value: value.region ?? field.defaultRegion ?? null,
+            options: field.getRegionOptions,
+        }) }}
+    </div>
+
+    <button class="rynpsc-phonenumber-button" id="{{ id ~ '-button' }}" type="button">
+        <span class="icon icon-{{ value.region ?? field.defaultRegion ?? null }}" id="{{ id ~ '-af' }}"></span>
+        <span class="rynpsc-phonenumber-button-caret" aria-hidden="true">downangle</span>
+    </button>
+
+    <div class="rynpsc-phonenumber-dropdown" id="{{ id ~ '-dropdown' }}">
+
+        <div class="rynpsc-phonenumber-search">
+
+            <label for="{{ id ~ '-search' }}" class="rynpsc-phonenumber-assistive">Filter regions</label>
+
+            {{ forms.text({
+                id: id ~ "-search",
+                placeholder: "Filter regions"|t("phonenumber"),
+            }) }}
+
+        </div>
+
+        <ul class="rynpsc-phonenumber-regions" id="{{ id ~ '-regions' }}">
+            {% for region in field.getRegionOptions %}
+                <li class="rynpsc-phonenumber-region" id="{{ id ~ '-' ~ region.value }}" data-region="{{ region.value }}" data-code="{{ region.code }}">
+                    <span class="rynpsc-phonenumber-flag icon-{{ region.value }}"></span>
+                    <span class="rynpsc-phonenumber-country">{{ region.label }}</span>
+                    <span class="rynpsc-phonenumber-code">+{{ region.code }}</span>
+                </li>
+            {% endfor %}
+        </ul>
+
+        <div class="rynpsc-phonenumber-no-results" id="{{ id ~ '-no-results' }}">
+            <p>{{ "No results"|t('phone-number') }}</p>
+        </div>
+
+    </div>
+
+	{{ forms.text({
+		id: id ~ "-number",
+        type: "tel",
+        size: 20,
+		label: "Number"|t("phonenumber"),
+		name: name ~ "[number]",
+		value: value.number ?? null,
+		class: "rynpsc-phonenumber-number"
+	}) }}
+
+</div>

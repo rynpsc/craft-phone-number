@@ -1,0 +1,11 @@
+{% import "_includes/forms" as forms %}
+
+{{ forms.selectField({
+    id: "defaultRegion",
+    name: "defaultRegion",
+    label: "Default Country"|t("phonenumber"),
+    value: field.defaultRegion,
+    options: field.getRegionOptions(),
+    errors: field.getErrors("defaultRegion"),
+    instructions: "The default country to use when parsing phone numbers."|t("phonenumber"),
+}) }}
