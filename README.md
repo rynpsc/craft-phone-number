@@ -33,6 +33,8 @@ composer require rynpsc/craft-phone-number
 
 The phone number field provides an easy way for authors to enter phone numbers.
 
+![](/resources/screenshot.jpg?raw=true)
+
 ### Templating
 
 - `{{ entry.phone.region }}` - The raw region code as entered in the field
