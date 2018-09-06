@@ -33,7 +33,7 @@ composer require rynpsc/craft-phone-number
 
 The phone number field provides an easy way for authors to enter phone numbers.
 
-<img src="/resources/screenshot.jpg" width="380">
+![Screenshot](/resources/screenshots/field.png)
 
 ### Templating
 
