@@ -230,15 +230,15 @@ export default function PhoneNumber(namespace) {
 	}
 
 	function open() {
-        elems.dropdown.classList.add('is-open');
+		elems.dropdown.classList.add('is-open');
 
-        const rect = elems.dropdown.getBoundingClientRect();
-        const displayAbove = rect.bottom + 20 > (window.innerHeight);
+		const rect = elems.dropdown.getBoundingClientRect();
+		const displayAbove = rect.bottom + 20 > (window.innerHeight);
 
-        elems.dropdown.classList.toggle('above', displayAbove);
+		elems.dropdown.classList.toggle('above', displayAbove);
 		elems.button.setAttribute('aria-expanded', true);
 		elems.button.classList.add('active');
-        elems.search.focus();
+		elems.search.focus();
 
 		highlight(selectedIndex);
 		elems.noResults.classList.remove('is-visible');
@@ -249,8 +249,8 @@ export default function PhoneNumber(namespace) {
 	}
 
 	function close() {
-        elems.dropdown.classList.remove('is-open');
-        elems.dropdown.classList.remove('above');
+		elems.dropdown.classList.remove('is-open');
+		elems.dropdown.classList.remove('above');
 		elems.button.removeAttribute('aria-expanded');
 		elems.button.classList.remove('active');
 		elems.search.value = '';
