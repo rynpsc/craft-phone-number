@@ -63,4 +63,8 @@ This plugin also adds a `tel` Twig filter for extracting phone numbers from a st
 {{ entry.text|tel }}
 ```
 
-**Note:** To avoid incorrect matches only numbers entered in international format will be formatted.
+By default only numbers entered in international format will be formatted. To format local number i.e. those without a region code such as +44, you can pass in a default country code to use when parsing.
+
+```twig
+{{ entry.text|tel('GB') }}
+```

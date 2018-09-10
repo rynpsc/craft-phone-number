@@ -49,15 +49,16 @@ class PhoneNumberExtension extends \Twig_Extension
      * Parses a string to automatically add anchors to phone numbers
      *
      * @param string $string The string to parse
+     * @param string $region The default region to use when matching
      * @param array $attributes Attributes to set on anchor
      * @return \Twig_Markup
      */
-    public function findNumbersFilter($string = null, $attributes = [])
+    public function findNumbersFilter(string $string = null, string $region = null, array $attributes = [])
     {
         $offset = 0;
 
         $phoneNumberUtil = PhoneNumberUtil::getInstance();
-        $phoneNumberMatcher = $phoneNumberUtil->findNumbers($string, null);
+        $phoneNumberMatcher = $phoneNumberUtil->findNumbers($string, $region);
 
         foreach ($phoneNumberMatcher as $phoneNumberMatch) {
             $textLength = strlen($string);
