@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.1.0 - 2018-09-24
+
+### Changed
+
+- Fix issue where classes were being incorrectly applied in IE11.
+
 ## 1.1.0 - 2018-09-10
 
 ### Added
