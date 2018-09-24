@@ -1,7 +1,7 @@
 {
-	"name": "rynpsc/craft-phone-number",
-	"description": "International phone number field.",
-	"version": "1.1.1",
+    "name": "rynpsc/craft-phone-number",
+    "description": "International phone number field.",
+    "version": "1.1.1",
     "type": "craft-plugin",
     "keywords": [
         "cms",
@@ -14,8 +14,8 @@
     "license": "MIT",
     "authors": [
         {
-          "name": "Ryan Pascoe",
-          "homepage": "https://www.ryanpascoe.co"
+            "name": "Ryan Pascoe",
+            "homepage": "https://www.ryanpascoe.co"
         }
     ],
     "support": {
@@ -23,20 +23,20 @@
         "source": "https://github.com/rynpsc/craft-phone-number",
         "docs": "https://github.com/rynpsc/craft-phone-number"
     },
-	"require": {
-		"craftcms/cms": "^3.0.0",
-		"giggsey/libphonenumber-for-php": "^8.9"
-	},
-	"autoload": {
-		"psr-4": {
-			"rynpsc\\phonenumber\\": "src/"
-		}
-	},
-	"extra": {
-		"name": "Phone Number",
-		"handle": "phone-number",
+    "require": {
+        "craftcms/cms": "^3.0.0",
+        "giggsey/libphonenumber-for-php": "^8.9"
+    },
+    "autoload": {
+        "psr-4": {
+            "rynpsc\\phonenumber\\": "src/"
+        }
+    },
+    "extra": {
+        "name": "Phone Number",
+        "handle": "phone-number",
         "class": "rynpsc\\phonenumber\\PhoneNumber",
         "changelogUrl": "https://raw.githubusercontent.com/rynpsc/craft-phone-number/master/CHANGELOG.md",
         "downloadUrl": "https://github.com/rynpsc/craft-phone-number/archive/master.zip"
-	}
+    }
 }
