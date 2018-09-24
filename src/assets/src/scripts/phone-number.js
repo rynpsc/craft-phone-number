@@ -1,4 +1,5 @@
 import './polyfills/Element.closest';
+import './polyfills/Element.classList';
 
 export default function PhoneNumber(namespace) {
 	let isOpen = false;
