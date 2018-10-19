@@ -47,7 +47,7 @@ The phone number field provides an easy way for authors to enter phone numbers.
 
 #### Number Formatting
 
-Numbers can be formated in the following formats:
+Numbers can be formatted in the following formats:
 
 | Format        | Example              |
 | :------------ | :--------------------|
