@@ -43,6 +43,7 @@ The phone number field provides an easy way for authors to enter phone numbers.
 - `{{ entry.phone.getRegionCode() }}` - The numerical region code
 - `{{ entry.phone.getLink() }} ` - Returns a phone number link
 - `{{ entry.phone.format('e164') }}` - Formats a phone number
+- `{{ entry.phone.getType() }}` - Returns the number type ([number types](#number-types))
 
 #### Number Formatting
 
@@ -54,6 +55,28 @@ Numbers can be formated in the following formats:
 | rfc3966       | tel:+44-117-496-0123 |
 | national      | 0117 496 0123        |
 | international | +44 117 496 0123     |
+
+#### Number Types
+
+Number types are returned as integers, use the table below for reference.
+
+| Value   | Type                 |
+| :------ | :------------------- |
+| 0       | Fixed line           |
+| 1       | Mobile               |
+| 2       | Fixed line or mobile |
+| 3       | Toll free            |
+| 4       | Premium rate         |
+| 5       | Shared cost          |
+| 6       | VOIP                 |
+| 7       | Personal number      |
+| 8       | Pager                |
+| 9       | UAN                  |
+| 10      | Unknown               |
+| 27      | Emergency            |
+| 28      | Voicemail            |
+| 29      | Short code           |
+| 30      | Standard rate        |
 
 ## Twig Filter
 

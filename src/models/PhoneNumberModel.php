@@ -118,6 +118,16 @@ class PhoneNumberModel extends Model implements \JsonSerializable
     }
 
     /**
+     * Returns the type of number
+     *
+     * @return int
+     */
+    public function getType()
+    {
+        return $this->phoneNumberUtil->getNumberType($this->phoneNumberObject);
+    }
+
+    /**
      * Returns an anchor prefilled with the URL
      *
      * @param array $attributes Attributes to apply to anchor

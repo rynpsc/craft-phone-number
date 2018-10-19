@@ -1,5 +1,11 @@
 # Changelog
 
+## Unreleased
+
+### Added
+
+- Added `getType()` to `PhoneNumberModel`.
+
 ## 1.1.1 - 2018-09-24
 
 ### Fixed
