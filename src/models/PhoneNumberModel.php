@@ -17,6 +17,7 @@ use craft\helpers\Template;
 use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\PhoneNumberFormat;
+use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
 
 /**
  * Phone Number Model
@@ -48,11 +49,20 @@ class PhoneNumberModel extends Model implements \JsonSerializable
     private $phoneNumberUtil;
 
     /**
+     * @var PhoneNumberOfflineGeocoder
+     */
+    private $geoCoder;
+
+    /**
      * @inheritdoc
      */
     public function __construct($number, $region, array $config = [])
     {
         $this->phoneNumberUtil = PhoneNumberUtil::getInstance();
+
+        if (Craft::$app->getI18n()->getIsIntlLoaded()) {
+            $this->geoCoder = PhoneNumberOfflineGeocoder::getInstance();
+        }
 
         $this->number = $number;
         $this->region = $region;
@@ -125,6 +135,22 @@ class PhoneNumberModel extends Model implements \JsonSerializable
     public function getType()
     {
         return $this->phoneNumberUtil->getNumberType($this->phoneNumberObject);
+    }
+
+    /**
+     * Returns the numbers description (country or geographical area)
+     */
+    public function getDescription(string $locale = null, string $region = null)
+    {
+        if (!$this->geoCoder) {
+            return null;
+        }
+
+        if (!isset($locale)) {
+            $locale = Craft::$app->language;
+        }
+
+        return $this->geoCoder->getDescriptionForNumber($this->phoneNumberObject, $locale, $region);
     }
 
     /**

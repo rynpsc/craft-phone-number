@@ -5,6 +5,7 @@
 ### Added
 
 - Added `getType()` to `PhoneNumberModel`.
+- Added `getDescription()` to `PhoneNumberModel`.
 
 ## 1.1.1 - 2018-09-24
 

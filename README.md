@@ -44,6 +44,7 @@ The phone number field provides an easy way for authors to enter phone numbers.
 - `{{ entry.phone.getLink() }} ` - Returns a phone number link
 - `{{ entry.phone.format('e164') }}` - Formats a phone number
 - `{{ entry.phone.getType() }}` - Returns the number type ([number types](#number-types))
+- `{{ entry.phone.getDescription()` }} - Returns the country or geographical area
 
 #### Number Formatting
 
