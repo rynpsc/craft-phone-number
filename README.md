@@ -72,7 +72,7 @@ Number types are returned as integers, use the table below for reference.
 | 7       | Personal number      |
 | 8       | Pager                |
 | 9       | UAN                  |
-| 10      | Unknown               |
+| 10      | Unknown              |
 | 27      | Emergency            |
 | 28      | Voicemail            |
 | 29      | Short code           |
