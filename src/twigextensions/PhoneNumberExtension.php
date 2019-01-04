@@ -55,6 +55,10 @@ class PhoneNumberExtension extends \Twig_Extension
      */
     public function findNumbersFilter(string $string = null, string $region = null, array $attributes = [])
     {
+        if ($string == null) {
+            return null;
+        }
+
         $offset = 0;
 
         $phoneNumberUtil = PhoneNumberUtil::getInstance();
