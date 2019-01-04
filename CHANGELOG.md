@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.1 - 2019-01-04
+
+## Fixed
+
+- Fix issue with tel filter when string is null.
+
 ## 1.2.0 - 2018-10-19
 
 ### Added
