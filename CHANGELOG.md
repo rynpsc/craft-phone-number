@@ -2,7 +2,7 @@
 
 ## 1.2.1 - 2019-01-04
 
-## Fixed
+### Fixed
 
 - Fix issue with tel filter when string is null.
 
