@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.2 - 2019-02-10
+
+### Fixed
+
+- Fix incorrect string replacement with `tel` filter when dealing with multi-byte strings.
+
 ## 1.2.1 - 2019-01-04
 
 ### Fixed
