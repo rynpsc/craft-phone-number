@@ -8,6 +8,7 @@
 namespace rynpsc\phonenumber\twigextensions;
 
 use rynpsc\phonenumber\models\PhoneNumberModel;
+use rynpsc\phonenumber\helpers\StringHelper;
 
 use Craft;
 use craft\helpers\Html;
@@ -60,15 +61,16 @@ class PhoneNumberExtension extends \Twig_Extension
         }
 
         $offset = 0;
+        $charset = Craft::$app->charset;
 
         $phoneNumberUtil = PhoneNumberUtil::getInstance();
-        $phoneNumberMatcher = $phoneNumberUtil->findNumbers($string, $region);
+        $phoneNumberMatches = $phoneNumberUtil->findNumbers($string, $region);
 
-        foreach ($phoneNumberMatcher as $phoneNumberMatch) {
-            $textLength = strlen($string);
+        foreach ($phoneNumberMatches as $phoneNumberMatch) {
+            $textLength = mb_strlen($string, $charset);
 
             $start = $phoneNumberMatch->start();
-            $length = strlen($phoneNumberMatch->rawString());
+            $length = mb_strlen($phoneNumberMatch->rawString(), $charset);
 
             $raw = $phoneNumberMatch->rawString();
             $number = $phoneNumberMatch->number();
@@ -78,10 +80,10 @@ class PhoneNumberExtension extends \Twig_Extension
             $link = Html::a($raw, $href, $attributes);
 
             // Replace number with anchor
-            $string = substr_replace($string, $link, ($start + $offset), $length);
+            $string = StringHelper::substrReplace($string, $link, ($start + $offset), $length);
 
             // Account for new string length
-            $offset += strlen($string) - $textLength;
+            $offset += mb_strlen($string, $charset) - $textLength;
         }
 
         return Template::raw($string);
