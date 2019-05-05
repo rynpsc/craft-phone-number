@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.3 - 2019-05-05
+
+### Fixed
+
+- Fix error when converting from a plain text field ([#1](https://github.com/rynpsc/craft-phone-number/issues/1)).
+
 ## 1.2.2 - 2019-02-10
 
 ### Fixed
