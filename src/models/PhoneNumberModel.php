@@ -154,20 +154,21 @@ class PhoneNumberModel extends Model implements \JsonSerializable
     }
 
     /**
-     * Returns an anchor prefilled with the URL
+     * Generates a hyperlink tag formatted with the phone number
      *
-     * @param array $attributes Attributes to apply to anchor
-     * @return \Twig_Markup
+     * @param array $options Attributes to apply to the hyperlink
+     * @return \Twig_Markup The generated hyperlink
      */
-    public function getLink($attributes = [])
+    public function getLink($options = [])
     {
         if (is_null($this->phoneNumberObject)) {
             return null;
         }
 
-        $href = $this->format('rfc3966');
+        $options['href'] = $this->format('rfc3966');
+
         $text = Html::encode($this->__toString());
-        $link = Html::a($text, $href, $attributes);
+        $link = Html::tag('a', $text, $options);
 
         return Template::raw($link);
     }
