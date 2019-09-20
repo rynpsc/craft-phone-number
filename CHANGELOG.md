@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.4 - 2019-09-20
+
+### Fixed
+
+- Fix issue where `getLink()` returned incorrect `href` value in when running Craft 3.3.
+
 ## 1.2.3 - 2019-05-05
 
 ### Fixed
