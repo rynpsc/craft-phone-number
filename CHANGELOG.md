@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.2.5 - 2019-10-15
+
+### Fixed
+
+- Fix issue where `tel` filter returned incorrect `href` value in when running Craft 3.3..
+
 ## 1.2.4 - 2019-09-20
 
 ### Fixed

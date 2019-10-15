@@ -1,7 +1,7 @@
 {
     "name": "rynpsc/craft-phone-number",
     "description": "International phone number field.",
-    "version": "1.2.4",
+    "version": "1.2.5",
     "type": "craft-plugin",
     "keywords": [
         "cms",
