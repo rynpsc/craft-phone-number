@@ -11,6 +11,7 @@ use rynpsc\phonenumber\models\PhoneNumberModel;
 use rynpsc\phonenumber\helpers\StringHelper;
 
 use Craft;
+use craft\helpers\ArrayHelper;
 use craft\helpers\Html;
 use craft\helpers\Template;
 
@@ -77,7 +78,9 @@ class PhoneNumberExtension extends \Twig_Extension
 
             // Create the anchor
             $href = $phoneNumberUtil->format($number, PhoneNumberFormat::RFC3966);
-            $link = Html::a($raw, $href, $attributes);
+            $link = Html::tag('a', $raw, ArrayHelper::merge($attributes,
+                ['href' => $phoneNumberUtil->format($number, PhoneNumberFormat::RFC3966)]
+            ));
 
             // Replace number with anchor
             $string = StringHelper::substrReplace($string, $link, ($start + $offset), $length);
