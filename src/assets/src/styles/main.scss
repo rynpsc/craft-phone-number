@@ -1,4 +1,4 @@
-@import "node_modules/craftcms-sass/src/mixins";
+@import "node_modules/craftcms-sass/mixins";
 
 $prefix: "rynpsc-phonenumber";
 
@@ -32,24 +32,20 @@ $prefix: "rynpsc-phonenumber";
 
 .#{$prefix}-button {
     @include margin-right(7px);
+    @include input-styles();
+
     display: flex;
 	align-items: center;
-	padding: 7px;
     appearance: none;
-
-    background: transparent;
     width: 54px;
-    border: 1px solid $hairlineColorAlpha;
-    border-radius: $textBorderRadius;
-    font-size: 14px;
-    color: $textColor;
-    height: 32px;
-    position: relative;
 
     &:focus,
     &.active {
-        outline: 0;
-        border-color: $blue;
+        @include input-focused-styles();
+    }
+
+    &::-moz-focus-inner {
+        border: 0;
     }
 }
 
@@ -62,18 +58,19 @@ $prefix: "rynpsc-phonenumber";
 }
 
 .#{$prefix}-dropdown {
-	@include menu-styles;
-
+    @include shadow();
 	position: fixed;
     top: calc(100% + 7px);
     top: 12px;
     bottom: 12px;
     left: 12px;
     right: 12px;
-	overflow: hidden;
-
+    z-index: 100;
 	display: none;
 	padding: 0;
+	overflow: hidden;
+    background-color: $white;
+    border-radius: $largeBorderRadius;
 
 	&.is-open {
 		display: block;
@@ -86,7 +83,7 @@ $prefix: "rynpsc-phonenumber";
 
 .#{$prefix}-search {
     padding: 14px;
-    border-bottom: 1px solid $hairlineColorAlpha;
+    border-bottom: 1px solid $hairlineColor;
 }
 
 .#{$prefix}-regions {
@@ -94,13 +91,14 @@ $prefix: "rynpsc-phonenumber";
 	overflow-y: scroll;
 	overscroll-behavior: contain;
 	position: relative;
+    scrollbar-color: $grey200 transparent;
 
 	&::-webkit-scrollbar {
 		width: 8px;
 	}
 
 	&::-webkit-scrollbar-thumb {
-        background: $hairlineColorAlpha;
+        background: $grey200;
 	}
 }
 
@@ -112,11 +110,12 @@ $prefix: "rynpsc-phonenumber";
 	margin: 0;
 	padding-top: 8px;
 	padding-bottom: 8px;
-	font-size: 12px;
+	font-size: 13px;
 
 	&.is-selected,
 	&.is-highlighted {
 		@include menu-option-active-styles();
+        cursor: pointer;
 	}
 }
 
@@ -138,7 +137,6 @@ $prefix: "rynpsc-phonenumber";
 		display: block;
 	}
 }
-
 
 @media only screen and (min-width: 673px) {
     .#{$prefix}-dropdown {
