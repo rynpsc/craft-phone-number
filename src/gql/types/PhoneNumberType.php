@@ -18,7 +18,6 @@ use GraphQL\Type\Definition\Type;
  * @package Phone Number
  * @since 1.4.0
  */
-
 class PhoneNumberType
 {
     /**
