@@ -47,7 +47,7 @@ class PhoneNumberType
     }
 
     /**
-     * @rejturn array
+     * @return array
      */
     public static function getFieldDefinitions(): array
     {
