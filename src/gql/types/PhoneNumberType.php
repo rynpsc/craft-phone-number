@@ -24,7 +24,7 @@ class PhoneNumberType
     /**
      * @return string
      */
-    static public function getName(): string
+    public static function getName(): string
     {
         return 'phoneNumber_PhoneNumber';
     }
@@ -32,7 +32,7 @@ class PhoneNumberType
     /**
      * @return Type
      */
-    static public function getType(): Type
+    public static function getType(): Type
     {
         if ($type = GqlEntityRegistry::getEntity(self::class)) {
             return $type;
