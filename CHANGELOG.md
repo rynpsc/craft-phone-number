@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.0 - 2020-12-05
+
+### Added
+
+- Added GraphQL content type ([#10](https://github.com/rynpsc/craft-phone-number/pull/10)).
+
 ## 1.3.0 - 2020-01-20
 
 ### Changed
