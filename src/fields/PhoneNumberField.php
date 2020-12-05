@@ -8,6 +8,7 @@
 namespace rynpsc\phonenumber\fields;
 
 use rynpsc\phonenumber\assets\PhoneNumberAsset;
+use rynpsc\phonenumber\gql\types\PhoneNumberType;
 use rynpsc\phonenumber\models\PhoneNumberModel;
 use rynpsc\phonenumber\validators\PhoneNumberValidator;
 
@@ -140,6 +141,14 @@ class PhoneNumberField extends Field implements PreviewableFieldInterface
         return $rules = [
             PhoneNumberValidator::class,
         ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getContentGqlType()
+    {
+        return PhoneNumberType::getType();
     }
 
     /**
