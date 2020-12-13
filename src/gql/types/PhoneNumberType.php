@@ -8,6 +8,7 @@
 namespace rynpsc\phonenumber\gql\types;
 
 use craft\gql\GqlEntityRegistry;
+use craft\gql\TypeLoader;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 
@@ -37,11 +38,17 @@ class PhoneNumberType
             return $type;
         }
 
-        return GqlEntityRegistry::createEntity(self::class, new ObjectType([
+        $type = GqlEntityRegistry::createEntity(self::class, new ObjectType([
             'name' => static::getName(),
             'fields' => self::class . '::getFieldDefinitions',
             'description' => 'This is the interface implemented by all phone number fields.',
         ]));
+
+        TypeLoader::registerType(static::getName(), static function() use ($type) {
+            return $type;
+        });
+
+        return $type;
     }
 
     /**
