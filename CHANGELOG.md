@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.1 - 2020-12-13
+
+### Fixed
+
+- Fix GraphQL error when `devMode` is set to `false`.
+
 ## 1.4.0 - 2020-12-05
 
 ### Added
