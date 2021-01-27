@@ -4,13 +4,13 @@
 
 ### Fixed
 
-- Fix region button padding. 
+- Fixed region button padding. 
 
 ## 1.4.1 - 2020-12-13
 
 ### Fixed
 
-- Fix GraphQL error when `devMode` is set to `false`.
+- Fixed GraphQL error when `devMode` is set to `false`.
 
 ## 1.4.0 - 2020-12-05
 
@@ -28,7 +28,7 @@
 
 ### Fixed
 
-- Fix issue where `tel` filter returned incorrect `href` value in when running Craft 3.3..
+- Fixed issue where `tel` filter returned incorrect `href` value in when running Craft 3.3..
 
 ## 1.2.4 - 2019-09-20
 
@@ -40,19 +40,19 @@
 
 ### Fixed
 
-- Fix error when converting from a plain text field ([#1](https://github.com/rynpsc/craft-phone-number/issues/1)).
+- Fixed error when converting from a plain text field ([#1](https://github.com/rynpsc/craft-phone-number/issues/1)).
 
 ## 1.2.2 - 2019-02-10
 
 ### Fixed
 
-- Fix incorrect string replacement with `tel` filter when dealing with multi-byte strings.
+- Fixed incorrect string replacement with `tel` filter when dealing with multi-byte strings.
 
 ## 1.2.1 - 2019-01-04
 
 ### Fixed
 
-- Fix issue with tel filter when string is null.
+- Fixed issue with tel filter when string is null.
 
 ## 1.2.0 - 2018-10-19
 
@@ -65,7 +65,7 @@
 
 ### Fixed
 
-- Fix issue where classes were being incorrectly applied in IE11.
+- Fixed issue where classes were being incorrectly applied in IE11.
 
 ## 1.1.0 - 2018-09-10
 
