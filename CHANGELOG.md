@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.2 - 2021-01-27
+
+### Fixed
+
+- Fix region button padding. 
+
 ## 1.4.1 - 2020-12-13
 
 ### Fixed
