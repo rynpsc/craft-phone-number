@@ -6,7 +6,7 @@ import cssnano from 'cssnano';
 import del from 'del';
 import gulp from 'gulp';
 import postcss from 'gulp-postcss';
-import sass from 'gulp-sass';
+import sass from 'gulp-dart-sass';
 import source from 'vinyl-source-stream';
 import sourcemaps from 'gulp-sourcemaps';
 import spritesmith from 'gulp.spritesmith';
