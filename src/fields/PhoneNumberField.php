@@ -60,6 +60,10 @@ class PhoneNumberField extends Field implements PreviewableFieldInterface
      */
     public function normalizeValue($value, ElementInterface $element = null)
     {
+        if ($value instanceof PhoneNumberModel) {
+            return $value;
+        }
+        
         if (is_string($value) && !empty($value)) {
             $value = Json::decodeIfJson($value);
         }
