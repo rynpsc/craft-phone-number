@@ -1,5 +1,11 @@
 # Changelog
 
+## 1.4.3 - 2021-03-12
+
+### Fixed
+
+- Fixed issue with field value normalization [#12](https://github.com/rynpsc/craft-phone-number/issues/12)
+
 ## 1.4.2 - 2021-01-27
 
 ### Fixed
