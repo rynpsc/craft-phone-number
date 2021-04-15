@@ -57,6 +57,8 @@ Numbers can be formatted in the following formats:
 | national      | 0117 496 0123        |
 | international | +44 117 496 0123     |
 
+The rfc3966 format is also available via the `tel` alias.
+
 #### Number Types
 
 Number types are returned as integers, use the table below for reference.

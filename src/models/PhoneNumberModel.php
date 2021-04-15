@@ -96,6 +96,7 @@ class PhoneNumberModel extends Model implements \JsonSerializable
             'international' => PhoneNumberFormat::INTERNATIONAL,
             'national' => PhoneNumberFormat::NATIONAL,
             'rfc3966' => PhoneNumberFormat::RFC3966,
+            'tel' => PhoneNumberFormat::RFC3966,
         ];
 
         $format = strtolower($format);
