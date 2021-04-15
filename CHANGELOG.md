@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.4.4 - 2021-04-15
+
+### Changed
+
+- Now requires Craft 3.6.12 or later
+- Updated focus styles to match Craft's new styles added in 3.6.12.
+
 ## 1.4.3 - 2021-03-12
 
 ### Fixed
