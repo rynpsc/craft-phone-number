@@ -13,9 +13,11 @@ use Craft;
 use craft\helpers\ArrayHelper;
 use craft\helpers\Html;
 use craft\helpers\Template;
+use Twig\Extension\AbstractExtension;
+use Twig\Markup;
+use Twig\TwigFilter;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberUtil;
-use Twig\Markup;
 
 /**
  * Phone Number Twig extension
@@ -24,7 +26,7 @@ use Twig\Markup;
  * @package Phone Number
  * @since 1.0
  */
-class PhoneNumberExtension extends \Twig_Extension
+class PhoneNumberExtension extends AbstractExtension
 {
     /**
      * Returns the name of the extension
@@ -42,7 +44,7 @@ class PhoneNumberExtension extends \Twig_Extension
     public function getFilters()
     {
         return [
-            new \Twig_SimpleFilter('tel', [$this, 'findNumbersFilter']),
+            new TwigFilter('tel', [$this, 'findNumbersFilter']),
         ];
     }
 
