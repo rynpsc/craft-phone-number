@@ -11,6 +11,7 @@ use rynpsc\phonenumber\validators\PhoneNumberValidator;
 
 use Craft;
 use craft\base\Model;
+use craft\helpers\ArrayHelper;
 use craft\helpers\Html;
 use craft\helpers\Template;
 
@@ -18,6 +19,7 @@ use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
+use Twig\Markup;
 
 /**
  * Phone Number Model
@@ -157,19 +159,23 @@ class PhoneNumberModel extends Model implements \JsonSerializable
     /**
      * Generates a hyperlink tag formatted with the phone number
      *
-     * @param array $options Attributes to apply to the hyperlink
-     * @return \Twig_Markup The generated hyperlink
+     * @param array $attributes Attributes to apply to the hyperlink
+     * @return Markup|null The generated hyperlink
      */
-    public function getLink($options = [])
+    public function getLink($attributes = [])
     {
         if (is_null($this->phoneNumberObject)) {
             return null;
         }
 
-        $options['href'] = $this->format('rfc3966');
+        $html = ArrayHelper::remove($attributes, 'html');
+        $text = ArrayHelper::remove($attributes, 'text', $this->__toString());
 
-        $text = Html::encode($this->__toString());
-        $link = Html::tag('a', $text, $options);
+        $content = $html ?? Html::encode($text);
+
+        $attributes['href'] = $this->format('rfc3966');
+
+        $link = Html::tag('a', $content, $attributes);
 
         return Template::raw($link);
     }

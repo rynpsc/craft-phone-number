@@ -68,19 +68,20 @@ class PhoneNumberExtension extends \Twig_Extension
         $phoneNumberMatches = $phoneNumberUtil->findNumbers($string, $region);
 
         foreach ($phoneNumberMatches as $phoneNumberMatch) {
+            $attrs = $attributes;
             $textLength = mb_strlen($string, $charset);
 
             $start = $phoneNumberMatch->start();
             $length = mb_strlen($phoneNumberMatch->rawString(), $charset);
 
-            $raw = $phoneNumberMatch->rawString();
-            $number = $phoneNumberMatch->number();
+            $html = ArrayHelper::remove($attrs, 'html');
+            $text = ArrayHelper::remove($attrs, 'text', $phoneNumberMatch->rawString());
 
-            // Create the anchor
-            $href = $phoneNumberUtil->format($number, PhoneNumberFormat::RFC3966);
-            $link = Html::tag('a', $raw, ArrayHelper::merge($attributes,
-                ['href' => $phoneNumberUtil->format($number, PhoneNumberFormat::RFC3966)]
-            ));
+            $content = $html ?? Html::encode($text);
+
+            $attrs['href'] = $phoneNumberUtil->format($phoneNumberMatch->number(), PhoneNumberFormat::RFC3966);
+
+            $link = Html::tag('a', $content, $attrs);
 
             // Replace number with anchor
             $string = StringHelper::substrReplace($string, $link, ($start + $offset), $length);
