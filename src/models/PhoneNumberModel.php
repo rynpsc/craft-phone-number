@@ -10,16 +10,15 @@ namespace rynpsc\phonenumber\models;
 use rynpsc\phonenumber\validators\PhoneNumberValidator;
 
 use Craft;
+use Twig\Markup;
 use craft\base\Model;
 use craft\helpers\ArrayHelper;
 use craft\helpers\Html;
 use craft\helpers\Template;
-
 use libphonenumber\PhoneNumber;
-use libphonenumber\PhoneNumberUtil;
 use libphonenumber\PhoneNumberFormat;
+use libphonenumber\PhoneNumberUtil;
 use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
-use Twig\Markup;
 
 /**
  * Phone Number Model

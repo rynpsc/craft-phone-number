@@ -17,12 +17,8 @@ use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
 use craft\helpers\ArrayHelper;
-use craft\helpers\Html;
 use craft\helpers\Json;
-
-use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberUtil;
-
 use yii\db\Schema;
 
 /**
@@ -63,7 +59,7 @@ class PhoneNumberField extends Field implements PreviewableFieldInterface
         if ($value instanceof PhoneNumberModel) {
             return $value;
         }
-        
+
         if (is_string($value) && !empty($value)) {
             $value = Json::decodeIfJson($value);
         }
@@ -99,8 +95,6 @@ class PhoneNumberField extends Field implements PreviewableFieldInterface
 
         $id = $view->formatInputId($this->handle);
         $namespace = Craft::$app->view->namespaceInputId($id);
-
-        $phoneNumberUtil = PhoneNumberUtil::getInstance();
 
         $view->registerAssetBundle(PhoneNumberAsset::class);
         $view->registerJs("new PhoneNumber('{$namespace}');");

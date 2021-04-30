@@ -7,16 +7,15 @@
 
 namespace rynpsc\phonenumber\twigextensions;
 
-use rynpsc\phonenumber\models\PhoneNumberModel;
 use rynpsc\phonenumber\helpers\StringHelper;
 
 use Craft;
 use craft\helpers\ArrayHelper;
 use craft\helpers\Html;
 use craft\helpers\Template;
-
-use libphonenumber\PhoneNumberUtil;
 use libphonenumber\PhoneNumberFormat;
+use libphonenumber\PhoneNumberUtil;
+use Twig\Markup;
 
 /**
  * Phone Number Twig extension
@@ -50,10 +49,10 @@ class PhoneNumberExtension extends \Twig_Extension
     /**
      * Parses a string to automatically add anchors to phone numbers
      *
-     * @param string $string The string to parse
-     * @param string $region The default region to use when matching
+     * @param string|null $string $string The string to parse
+     * @param string|null $region The default region to use when matching
      * @param array $attributes Attributes to set on anchor
-     * @return \Twig_Markup
+     * @return Markup
      */
     public function findNumbersFilter(string $string = null, string $region = null, array $attributes = [])
     {

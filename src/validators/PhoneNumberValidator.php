@@ -8,8 +8,8 @@
 namespace rynpsc\phonenumber\validators;
 
 use Craft;
-use libphonenumber\PhoneNumberUtil;
 use libphonenumber\NumberParseException;
+use libphonenumber\PhoneNumberUtil;
 use yii\validators\Validator;
 
 /**
