@@ -101,7 +101,7 @@ By default, only numbers entered in international format will be formatted. To f
 
 Both the `getLink()` method and `tel` filter support setting the generated links content and HTML attributes.
 
-Attributes are set as per [`yii\helpers\BaseHtml::renderTagAttributes() `](https://www.yiiframework.com/doc/api/2.0/yii-helpers-basehtml#renderTagAttributes()-detail).
+Attributes are set as per [`yii\helpers\BaseHtml::renderTagAttributes()`](https://www.yiiframework.com/doc/api/2.0/yii-helpers-basehtml#renderTagAttributes()-detail).
 
 ```twig
 {{ entry.phone.getLink({
