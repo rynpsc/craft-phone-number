@@ -182,7 +182,7 @@ class PhoneNumberModel extends Model implements \JsonSerializable
     /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['number'], PhoneNumberValidator::class],
