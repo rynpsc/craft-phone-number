@@ -41,8 +41,8 @@ The Phone Number field provides an easy way of parsing, formatting, storing and 
 
 - `{{ entry.phone.region }}` - The raw region code as entered in the field
 - `{{ entry.phone.number }}` - The raw number as entered in the field
-- `{{ entry.phone.getCountryCode() }}` - The alphabetical country code
-- `{{ entry.phone.getRegionCode() }}` - The numerical region code
+- `{{ entry.phone.getCountryCode() }}` - The numerical country code
+- `{{ entry.phone.getRegionCode() }}` - The alphabetical region code
 - `{{ entry.phone.getLink() }} ` - Returns a phone number link
 - `{{ entry.phone.format('e164') }}` - Formats a phone number
 - `{{ entry.phone.getType() }}` - Returns the number type ([number types](#number-types))
