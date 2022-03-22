@@ -19,13 +19,10 @@ use craft\web\assets\cp\CpAsset;
  */
 class PhoneNumberAsset extends AssetBundle
 {
-    // Public Methods
-    // =========================================================================
-
     /**
      * @inheritdoc
      */
-    public function init()
+    public function init(): void
     {
         $this->sourcePath = "@rynpsc/phonenumber/assets/dist";
 

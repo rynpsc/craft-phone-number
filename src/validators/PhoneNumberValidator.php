@@ -24,7 +24,7 @@ class PhoneNumberValidator extends Validator
     /**
      * @inheritdoc
      */
-    public function validateAttribute($model, $attribute)
+    public function validateAttribute($model, $attribute): void
     {
         $valid = false;
         $message = null;

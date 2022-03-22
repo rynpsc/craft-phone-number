@@ -13,13 +13,13 @@ use rynpsc\phonenumber\models\PhoneNumberModel;
 use rynpsc\phonenumber\validators\PhoneNumberValidator;
 
 use Craft;
+use Locale;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
 use craft\helpers\ArrayHelper;
 use craft\helpers\Json;
 use libphonenumber\PhoneNumberUtil;
-use yii\db\Schema;
 
 /**
  * Phone Number Field
@@ -30,10 +30,7 @@ use yii\db\Schema;
  */
 class PhoneNumberField extends Field implements PreviewableFieldInterface
 {
-    /**
-     * @var string|null
-     */
-    public $defaultRegion;
+    public ?string $defaultRegion;
 
     /**
      * @inheritdoc
@@ -41,14 +38,6 @@ class PhoneNumberField extends Field implements PreviewableFieldInterface
     public static function displayName(): string
     {
         return Craft::t('phone-number', 'Phone Number');
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function getContentColumnType(): array|string
-    {
-        return Schema::TYPE_STRING;
     }
 
     /**
@@ -77,7 +66,7 @@ class PhoneNumberField extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function serializeValue(mixed $value, ?\craft\base\ElementInterface $element = null): mixed
+    public function serializeValue(mixed $value, ?\craft\base\ElementInterface $element = null): ?string
     {
         if (!is_object($value)) {
             return null;
@@ -134,9 +123,9 @@ class PhoneNumberField extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function getElementValidationRules() :array
+    public function getElementValidationRules(): array
     {
-        return $rules = [
+        return [
             PhoneNumberValidator::class,
         ];
     }
@@ -151,21 +140,15 @@ class PhoneNumberField extends Field implements PreviewableFieldInterface
 
     /**
      * Get the regions and metadata
-     *
-     * @return array
      */
-    public function getRegionOptions()
+    public function getRegionOptions(): array
     {
         $regions = [];
         $language = Craft::$app->request->getPreferredLanguage();
         $supportedRegions = PhoneNumberUtil::getInstance()->getSupportedRegions();
 
         foreach ($supportedRegions as $region) {
-            if (Craft::$app->getI18n()->getIsIntlLoaded()) {
-                $label = \Locale::getDisplayRegion('-'.$region, $language);
-            } else {
-                $label = Craft::t('app', $region);
-            }
+            $label = Locale::getDisplayRegion('-' . $region, $language);
 
             $countryCode = PhoneNumberUtil::getInstance()->getCountryCodeForRegion($region);
 

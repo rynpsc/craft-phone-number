@@ -44,9 +44,7 @@ class PhoneNumberType
         ]));
     }
 
-    /**
-     * @return array
-     */
+
     public static function getFieldDefinitions(): array
     {
         return [

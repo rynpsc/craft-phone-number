@@ -16,20 +16,16 @@ namespace rynpsc\phonenumber\helpers;
  */
 class StringHelper extends \craft\helpers\StringHelper
 {
-    // Public Methods
-    // =========================================================================
-
     /**
-     * Multi-byte sub string replacement.
+     * Multibyte safe sub string replacement.
      *
-     * @param string $string
-     * @param mixed $replacement
+     * @param string $string The string to replace
+     * @param mixed $replacement The replacement value
      * @param mixed $start
      * @param mixed $length
-     * @return string
      */
     public static function substrReplace(string $string, string $replacement, int $start, int $length): string
     {
-        return mb_substr($string, 0, $start).$replacement.mb_substr($string, $start + $length);
+        return mb_substr($string, 0, $start) . $replacement . mb_substr($string, $start + $length);
     }
 }

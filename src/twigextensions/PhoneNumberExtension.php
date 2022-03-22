@@ -10,12 +10,12 @@ namespace rynpsc\phonenumber\twigextensions;
 use rynpsc\phonenumber\helpers\StringHelper;
 
 use Craft;
-use craft\helpers\ArrayHelper;
-use craft\helpers\Html;
-use craft\helpers\Template;
 use Twig\Extension\AbstractExtension;
 use Twig\Markup;
 use Twig\TwigFilter;
+use craft\helpers\ArrayHelper;
+use craft\helpers\Html;
+use craft\helpers\Template;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberUtil;
 
@@ -33,7 +33,7 @@ class PhoneNumberExtension extends AbstractExtension
      *
      * @return string The extension name
      */
-    public function getName()
+    public function getName(): string
     {
         return 'Phone Number';
     }
@@ -41,7 +41,7 @@ class PhoneNumberExtension extends AbstractExtension
     /**
      * @inheritdoc
      */
-    public function getFilters()
+    public function getFilters(): array
     {
         return [
             new TwigFilter('tel', [$this, 'findNumbersFilter']),
@@ -54,9 +54,8 @@ class PhoneNumberExtension extends AbstractExtension
      * @param string|null $string $string The string to parse
      * @param string|null $region The default region to use when matching
      * @param array $attributes Attributes to set on anchor
-     * @return Markup
      */
-    public function findNumbersFilter(string $string = null, string $region = null, array $attributes = [])
+    public function findNumbersFilter(string $string = null, string $region = null, array $attributes = []): ?Markup
     {
         if ($string == null) {
             return null;

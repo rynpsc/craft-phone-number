@@ -29,41 +29,23 @@ use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
  */
 class PhoneNumberModel extends Model implements \JsonSerializable
 {
-    /**
-     * @var string
-     */
-    public $number;
+    public string $number;
 
-    /**
-     * @var string
-     */
-    public $region;
+    public string $region;
 
-    /**
-     * @var PhoneNumber
-     */
-    private $phoneNumberObject;
+    private ?PhoneNumber $phoneNumberObject;
 
-    /**
-     * @var PhoneNumberUtil
-     */
-    private $phoneNumberUtil;
+    private PhoneNumberUtil $phoneNumberUtil;
 
-    /**
-     * @var PhoneNumberOfflineGeocoder
-     */
-    private $geoCoder;
+    private PhoneNumberOfflineGeocoder $geoCoder;
 
     /**
      * @inheritdoc
      */
-    public function __construct($number, $region, array $config = [])
+    public function __construct(string $number, ?string $region, array $config = [])
     {
         $this->phoneNumberUtil = PhoneNumberUtil::getInstance();
-
-        if (Craft::$app->getI18n()->getIsIntlLoaded()) {
-            $this->geoCoder = PhoneNumberOfflineGeocoder::getInstance();
-        }
+        $this->geoCoder = PhoneNumberOfflineGeocoder::getInstance();
 
         $this->number = $number;
         $this->region = $region;
@@ -77,9 +59,6 @@ class PhoneNumberModel extends Model implements \JsonSerializable
         parent::__construct($config);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function __toString()
     {
         return (string)$this->number;
@@ -88,9 +67,9 @@ class PhoneNumberModel extends Model implements \JsonSerializable
     /**
      * Formats a phone number in the specified format
      *
-     * @return string
+     * @param string|null $format
      */
-    public function format(string $format = null)
+    public function format(string $format = null): string
     {
         $formats = [
             'e164' => PhoneNumberFormat::E164,
@@ -111,38 +90,32 @@ class PhoneNumberModel extends Model implements \JsonSerializable
 
     /**
      * Returns the country code
-     *
-     * @return string
      */
-    public function getCountryCode()
+    public function getCountryCode(): string
     {
         return $this->phoneNumberObject->getCountryCode();
     }
 
     /**
      * Returns the region code
-     *
-     * @return string
      */
-    public function getRegionCode()
+    public function getRegionCode(): string
     {
         return $this->phoneNumberUtil->getRegionCodeForNumber($this->phoneNumberObject);
     }
 
     /**
      * Returns the type of number
-     *
-     * @return int
      */
-    public function getType()
+    public function getType(): int
     {
         return $this->phoneNumberUtil->getNumberType($this->phoneNumberObject);
     }
 
     /**
-     * Returns the numbers description (country or geographical area)
+     * Returns the numbers' description (country or geographical area)
      */
-    public function getDescription(string $locale = null, string $region = null)
+    public function getDescription(string $locale = null, string $region = null): ?string
     {
         if (!$this->geoCoder) {
             return null;
@@ -159,11 +132,10 @@ class PhoneNumberModel extends Model implements \JsonSerializable
      * Generates a hyperlink tag formatted with the phone number
      *
      * @param array $attributes Attributes to apply to the hyperlink
-     * @return Markup|null The generated hyperlink
      */
-    public function getLink($attributes = [])
+    public function getLink(array $attributes = []): ?Markup
     {
-        if (is_null($this->phoneNumberObject)) {
+        if ($this->phoneNumberObject === null) {
             return null;
         }
 
@@ -190,9 +162,7 @@ class PhoneNumberModel extends Model implements \JsonSerializable
     }
 
     /**
-     * Specify data which should be serialized to JSON
-     *
-     * @return array
+     * @inheritdoc
      */
     public function jsonSerialize(): array
     {
