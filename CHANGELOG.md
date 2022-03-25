@@ -5,6 +5,7 @@
 - Added `getCarrierName`
 - Added `getExtension`
 - Added `getTimeZones`
+- Added `formatForCountry`
 
 ## 2.0.0-beta.1 - 2022-03-22
 

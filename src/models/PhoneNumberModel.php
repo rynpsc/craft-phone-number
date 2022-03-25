@@ -114,6 +114,18 @@ class PhoneNumberModel extends Model implements JsonSerializable
     }
 
     /**
+     * Formats a phone number for out-of-country dialing purposes.
+     *
+     * @param string|null $region The region where the call is being placed.
+     */
+    public function formatForCountry(string $region = null): string
+    {
+        return $this
+            ->phoneNumberUtil
+            ->formatOutOfCountryCallingNumber($this->phoneNumberObject, $region);
+    }
+
+    /**
      * Returns the country code
      */
     public function getCountryCode(): string
