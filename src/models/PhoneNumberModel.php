@@ -95,6 +95,7 @@ class PhoneNumberModel extends Model implements JsonSerializable
      * Formats a phone number for out-of-country dialing purposes.
      *
      * @param string|null $region The region where the call is being placed.
+     * @since 2.0.0
      */
     public function formatForCountry(string $region = null): string
     {
@@ -108,6 +109,7 @@ class PhoneNumberModel extends Model implements JsonSerializable
      *
      * @param string $region The region where the call is being placed.
      * @param bool $format Whether the number should be returned with formatting symbols, such as spaces and dashes.
+     * @since 2.0.0
      */
     public function formatForMobileDialing(string $region, bool $format = true): string
     {
@@ -118,6 +120,8 @@ class PhoneNumberModel extends Model implements JsonSerializable
 
     /**
      * Gets the name of the carrier for the given phone number, in the language provided.
+     *
+     * @since 2.0.0
      */
     public function getCarrierName(string $locale = null): string
     {
@@ -156,6 +160,8 @@ class PhoneNumberModel extends Model implements JsonSerializable
 
     /**
      * Returns the extension for this phone number.
+     *
+     * @since 2.0.0
      */
     public function getExtension(): ?string
     {
@@ -195,6 +201,8 @@ class PhoneNumberModel extends Model implements JsonSerializable
 
     /**
      * Returns a list of time zones to which this phone number belongs.
+     *
+     * @since 2.0.0
      */
     public function getTimeZones(): array
     {
@@ -202,7 +210,7 @@ class PhoneNumberModel extends Model implements JsonSerializable
 
         return $mapper->getTimeZonesForNumber($this->phoneNumberObject);
     }
-    
+
     /**
      * Returns the type of number
      */
