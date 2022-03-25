@@ -55,7 +55,7 @@ class PhoneNumberModel extends Model implements JsonSerializable
 
         try {
             $this->phoneNumberObject = $this->phoneNumberUtil->parse($number, $region);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             // Continue
         }
 
@@ -80,7 +80,6 @@ class PhoneNumberModel extends Model implements JsonSerializable
 
         return $mapper->getNameForNumber($this->phoneNumberObject, $locale);
     }
-
 
     /**
      * Returns the extension for this phone number.
@@ -176,7 +175,6 @@ class PhoneNumberModel extends Model implements JsonSerializable
 
         return Template::raw($link);
     }
-
 
     /**
      * Returns a list of time zones to which this phone number belongs.
