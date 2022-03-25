@@ -17,6 +17,7 @@ use craft\helpers\Html;
 use craft\helpers\Template;
 use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberFormat;
+use libphonenumber\PhoneNumberToCarrierMapper;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
 
@@ -62,6 +63,20 @@ class PhoneNumberModel extends Model implements \JsonSerializable
     public function __toString()
     {
         return (string)$this->number;
+    }
+
+    /**
+     * Gets the name of the carrier for the given phone number, in the language provided.
+     */
+    public function getCarrierName(string $locale = null): string
+    {
+        $mapper = PhoneNumberToCarrierMapper::getInstance();
+
+        if (!isset($locale)) {
+            $locale = Craft::$app->language;
+        }
+
+        return $mapper->getNameForNumber($this->phoneNumberObject, $locale);
     }
 
     /**

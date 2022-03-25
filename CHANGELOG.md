@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Added `getCarrierName`
+
 ## 2.0.0-beta.1 - 2022-03-22
 
 - Craft 4 compatibility.
