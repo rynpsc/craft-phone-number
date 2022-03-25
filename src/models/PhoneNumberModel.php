@@ -68,28 +68,6 @@ class PhoneNumberModel extends Model implements JsonSerializable
     }
 
     /**
-     * Gets the name of the carrier for the given phone number, in the language provided.
-     */
-    public function getCarrierName(string $locale = null): string
-    {
-        $mapper = PhoneNumberToCarrierMapper::getInstance();
-
-        if (!isset($locale)) {
-            $locale = Craft::$app->language;
-        }
-
-        return $mapper->getNameForNumber($this->phoneNumberObject, $locale);
-    }
-
-    /**
-     * Returns the extension for this phone number.
-     */
-    public function getExtension(): ?string
-    {
-        return $this->phoneNumberObject->getExtension();
-    }
-
-    /**
      * Formats a phone number in the specified format
      *
      * @param string|null $format
@@ -139,27 +117,25 @@ class PhoneNumberModel extends Model implements JsonSerializable
     }
 
     /**
+     * Gets the name of the carrier for the given phone number, in the language provided.
+     */
+    public function getCarrierName(string $locale = null): string
+    {
+        $mapper = PhoneNumberToCarrierMapper::getInstance();
+
+        if (!isset($locale)) {
+            $locale = Craft::$app->language;
+        }
+
+        return $mapper->getNameForNumber($this->phoneNumberObject, $locale);
+    }
+
+    /**
      * Returns the country code
      */
     public function getCountryCode(): string
     {
         return $this->phoneNumberObject->getCountryCode();
-    }
-
-    /**
-     * Returns the region code
-     */
-    public function getRegionCode(): string
-    {
-        return $this->phoneNumberUtil->getRegionCodeForNumber($this->phoneNumberObject);
-    }
-
-    /**
-     * Returns the type of number
-     */
-    public function getType(): int
-    {
-        return $this->phoneNumberUtil->getNumberType($this->phoneNumberObject);
     }
 
     /**
@@ -176,6 +152,14 @@ class PhoneNumberModel extends Model implements JsonSerializable
         }
 
         return $this->geoCoder->getDescriptionForNumber($this->phoneNumberObject, $locale, $region);
+    }
+
+    /**
+     * Returns the extension for this phone number.
+     */
+    public function getExtension(): ?string
+    {
+        return $this->phoneNumberObject->getExtension();
     }
 
     /**
@@ -202,6 +186,14 @@ class PhoneNumberModel extends Model implements JsonSerializable
     }
 
     /**
+     * Returns the region code
+     */
+    public function getRegionCode(): string
+    {
+        return $this->phoneNumberUtil->getRegionCodeForNumber($this->phoneNumberObject);
+    }
+
+    /**
      * Returns a list of time zones to which this phone number belongs.
      */
     public function getTimeZones(): array
@@ -209,6 +201,14 @@ class PhoneNumberModel extends Model implements JsonSerializable
         $mapper = PhoneNumberToTimeZonesMapper::getInstance();
 
         return $mapper->getTimeZonesForNumber($this->phoneNumberObject);
+    }
+    
+    /**
+     * Returns the type of number
+     */
+    public function getType(): int
+    {
+        return $this->phoneNumberUtil->getNumberType($this->phoneNumberObject);
     }
 
     /**
