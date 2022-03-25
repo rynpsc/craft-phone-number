@@ -79,6 +79,15 @@ class PhoneNumberModel extends Model implements \JsonSerializable
         return $mapper->getNameForNumber($this->phoneNumberObject, $locale);
     }
 
+
+    /**
+     * Returns the extension for this phone number.
+     */
+    public function getExtension(): ?string
+    {
+        return $this->phoneNumberObject->getExtension();
+    }
+
     /**
      * Formats a phone number in the specified format
      *

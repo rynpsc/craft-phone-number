@@ -3,6 +3,7 @@
 ## Unreleased
 
 - Added `getCarrierName`
+- Added `getExtension`
 
 ## 2.0.0-beta.1 - 2022-03-22
 
