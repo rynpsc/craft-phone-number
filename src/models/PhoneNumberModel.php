@@ -126,6 +126,19 @@ class PhoneNumberModel extends Model implements JsonSerializable
     }
 
     /**
+     * Returns a number formatted in such a way that it can be dialed from a mobile phone in the specific region.
+     *
+     * @param string $region The region where the call is being placed.
+     * @param bool $format Whether the number should be returned with formatting symbols, such as spaces and dashes.
+     */
+    public function formatForMobileDialing(string $region, bool $format = true): string
+    {
+        return $this
+            ->phoneNumberUtil
+            ->formatNumberForMobileDialing($this->phoneNumberObject, $region, $format);
+    }
+
+    /**
      * Returns the country code
      */
     public function getCountryCode(): string
