@@ -10,6 +10,7 @@ namespace rynpsc\phonenumber\models;
 use rynpsc\phonenumber\validators\PhoneNumberValidator;
 
 use Craft;
+use JsonSerializable;
 use Twig\Markup;
 use craft\base\Model;
 use craft\helpers\ArrayHelper;
@@ -28,7 +29,7 @@ use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
  * @package Phone Number
  * @since 1.0
  */
-class PhoneNumberModel extends Model implements \JsonSerializable
+class PhoneNumberModel extends Model implements JsonSerializable
 {
     public string $number;
 
