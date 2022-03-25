@@ -19,6 +19,7 @@ use craft\helpers\Template;
 use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberToCarrierMapper;
+use libphonenumber\PhoneNumberToTimeZonesMapper;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
 
@@ -174,6 +175,17 @@ class PhoneNumberModel extends Model implements JsonSerializable
         $link = Html::tag('a', $content, $attributes);
 
         return Template::raw($link);
+    }
+
+
+    /**
+     * Returns a list of time zones to which this phone number belongs.
+     */
+    public function getTimeZones(): array
+    {
+        $mapper = PhoneNumberToTimeZonesMapper::getInstance();
+
+        return $mapper->getTimeZonesForNumber($this->phoneNumberObject);
     }
 
     /**
