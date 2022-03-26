@@ -7,6 +7,7 @@
 - Added `getTimeZones`
 - Added `formatForCountry`
 - Added `formatForMobileDialing`
+- Added `carrierName` to GraphQl type
 - Added `extension` to GraphQL type
 - Added `format` to GraphQL type
 - Added `formatForCountry` to GraphQL type

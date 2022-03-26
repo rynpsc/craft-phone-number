@@ -42,6 +42,14 @@ class PhoneNumberType
     public static function getFieldDefinitions(): array
     {
         return [
+            'carrierName' => [
+                'name' => 'carrierName',
+                'type' => Type::string(),
+                'args' => ['locale' => Type::string()],
+                'resolve' => function($source, $arguments) {
+                    return $source->getCarrierName(ArrayHelper::getValue($arguments, 'locale'));
+                },
+            ],
             'countryCode' => [
                 'name' => 'countryCode',
                 'type' => Type::string(),
