@@ -8,6 +8,7 @@
 namespace rynpsc\phonenumber\gql\types;
 
 use craft\gql\GqlEntityRegistry;
+use craft\helpers\ArrayHelper;
 use GraphQL\Type\Definition\ObjectType;
 use GraphQL\Type\Definition\Type;
 
