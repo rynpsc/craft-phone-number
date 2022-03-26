@@ -66,7 +66,7 @@ class PhoneNumberType
                         ArrayHelper::getValue($arguments, 'locale'),
                         ArrayHelper::getValue($arguments, 'region'),
                     );
-                }
+                },
             ],
             'extension' => [
                 'name' => 'extension',
@@ -78,7 +78,7 @@ class PhoneNumberType
                 'args' => ['format' => Type::string()],
                 'resolve' => function($source, $arguments) {
                     return $source->format(ArrayHelper::getValue($arguments, 'format'));
-                }
+                },
             ],
             'formatCountry' => [
                 'name' => 'formatForCountry',
