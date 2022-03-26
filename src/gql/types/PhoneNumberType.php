@@ -42,29 +42,9 @@ class PhoneNumberType
     public static function getFieldDefinitions(): array
     {
         return [
-            'extension' => [
-                'name' => 'extension',
-                'type' => Type::string(),
-            ],
-            'region' => [
-                'name' => 'region',
-                'type' => Type::string(),
-            ],
-            'number' => [
-                'name' => 'number',
-                'type' => Type::string(),
-            ],
             'countryCode' => [
                 'name' => 'countryCode',
                 'type' => Type::string(),
-            ],
-            'regionCode' => [
-                'name' => 'regionCode',
-                'type' => Type::string(),
-            ],
-            'type' => [
-                'name' => 'type',
-                'type' => Type::int(),
             ],
             'description' => [
                 'name' => 'description',
@@ -79,6 +59,10 @@ class PhoneNumberType
                         ArrayHelper::getValue($arguments, 'region'),
                     );
                 }
+            ],
+            'extension' => [
+                'name' => 'extension',
+                'type' => Type::string(),
             ],
             'format' => [
                 'name' => 'format',
@@ -110,9 +94,25 @@ class PhoneNumberType
                     );
                 },
             ],
+            'number' => [
+                'name' => 'number',
+                'type' => Type::string(),
+            ],
+            'region' => [
+                'name' => 'region',
+                'type' => Type::string(),
+            ],
+            'regionCode' => [
+                'name' => 'regionCode',
+                'type' => Type::string(),
+            ],
             'timezones' => [
                 'name' => 'timezones',
                 'type' => Type::listOf(Type::string()),
+            ],
+            'type' => [
+                'name' => 'type',
+                'type' => Type::int(),
             ],
         ];
     }
