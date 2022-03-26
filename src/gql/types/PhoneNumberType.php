@@ -102,6 +102,20 @@ class PhoneNumberType
                     return $source->formatForCountry(ArrayHelper::getValue($arguments, 'region'));
                 },
             ],
+            'formatMobileDialing' => [
+                'name' => 'formatForMobileDialing',
+                'type' => Type::string(),
+                'args' => [
+                    'region' => Type::string(),
+                    'format' => Type::boolean(),
+                ],
+                'resolve' => function($source, $arguments) {
+                    return $source->formatForMobileDialing(
+                        ArrayHelper::getValue($arguments, 'region'),
+                        ArrayHelper::getValue($arguments, 'format'),
+                    );
+                },
+            ],
             'timezones' => [
                 'name' => 'timezones',
                 'type' => Type::listOf(Type::string()),
