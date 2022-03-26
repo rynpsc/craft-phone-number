@@ -7,6 +7,7 @@
 - Added `getTimeZones`
 - Added `formatForCountry`
 - Added `formatForMobileDialing`
+- Added `extension` to GraphQL type
 
 ## 2.0.0-beta.1 - 2022-03-22
 

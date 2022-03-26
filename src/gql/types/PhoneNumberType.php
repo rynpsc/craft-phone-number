@@ -48,6 +48,10 @@ class PhoneNumberType
     public static function getFieldDefinitions(): array
     {
         return [
+            'extension' => [
+                'name' => 'extension',
+                'type' => Type::string(),
+            ],
             'region' => [
                 'name' => 'region',
                 'type' => Type::string(),
