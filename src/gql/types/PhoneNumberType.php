@@ -94,6 +94,14 @@ class PhoneNumberType
                     return $source->format(ArrayHelper::getValue($arguments, 'format'));
                 }
             ],
+            'formatCountry' => [
+                'name' => 'formatForCountry',
+                'type' => Type::string(),
+                'args' => ['region' => Type::string()],
+                'resolve' => function($source, $arguments) {
+                    return $source->formatForCountry(ArrayHelper::getValue($arguments, 'region'));
+                },
+            ],
             'timezones' => [
                 'name' => 'timezones',
                 'type' => Type::listOf(Type::string()),
