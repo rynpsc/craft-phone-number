@@ -20,17 +20,11 @@ use GraphQL\Type\Definition\Type;
  */
 class PhoneNumberType
 {
-    /**
-     * @return string
-     */
     public static function getName(): string
     {
         return 'phoneNumber_PhoneNumber';
     }
 
-    /**
-     * @return Type
-     */
     public static function getType(): Type
     {
         if ($type = GqlEntityRegistry::getEntity(self::class)) {
@@ -43,7 +37,6 @@ class PhoneNumberType
             'description' => 'This is the interface implemented by all phone number fields.',
         ]));
     }
-
 
     public static function getFieldDefinitions(): array
     {
