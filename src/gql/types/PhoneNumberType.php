@@ -75,6 +75,16 @@ class PhoneNumberType
             'description' => [
                 'name' => 'description',
                 'type' => Type::string(),
+                'args' => [
+                    'locale' => Type::string(),
+                    'region' => Type::string(),
+                ],
+                'resolve' => function($source, $arguments) {
+                    return $source->getDescription(
+                        ArrayHelper::getValue($arguments, 'locale'),
+                        ArrayHelper::getValue($arguments, 'region'),
+                    );
+                }
             ],
         ];
     }
