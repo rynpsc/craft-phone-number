@@ -86,6 +86,14 @@ class PhoneNumberType
                     );
                 }
             ],
+            'format' => [
+                'name' => 'format',
+                'type' => Type::string(),
+                'args' => ['format' => Type::string()],
+                'resolve' => function($source, $arguments) {
+                    return $source->format(ArrayHelper::getValue($arguments, 'format'));
+                }
+            ],
             'timezones' => [
                 'name' => 'timezones',
                 'type' => Type::listOf(Type::string()),
