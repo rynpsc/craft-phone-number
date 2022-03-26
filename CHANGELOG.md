@@ -8,6 +8,7 @@
 - Added `formatForCountry`
 - Added `formatForMobileDialing`
 - Added `extension` to GraphQL type
+- Added `timezones` to GraphQL type
 - Added support for `locale` and `region` arguments to `description` GraphQL field 
 
 ## 2.0.0-beta.1 - 2022-03-22

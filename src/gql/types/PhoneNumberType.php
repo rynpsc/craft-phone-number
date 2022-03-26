@@ -86,6 +86,10 @@ class PhoneNumberType
                     );
                 }
             ],
+            'timezones' => [
+                'name' => 'timezones',
+                'type' => Type::listOf(Type::string()),
+            ],
         ];
     }
 }
