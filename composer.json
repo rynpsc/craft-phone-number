@@ -49,6 +49,9 @@
         "phpstan": "phpstan analyse --memory-limit=1G"
     },
     "config": {
+        "platform": {
+            "php": "8.02"
+        },
         "allow-plugins": {
             "yiisoft/yii2-composer": true,
             "craftcms/plugin-installer": true
