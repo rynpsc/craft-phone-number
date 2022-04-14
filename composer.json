@@ -22,11 +22,16 @@
         "source": "https://github.com/rynpsc/craft-phone-number",
         "docs": "https://github.com/rynpsc/craft-phone-number"
     },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
     "require": {
         "php": "^8.0.2",
         "ext-intl": "*",
         "craftcms/cms": "^4.0.0-alpha",
         "giggsey/libphonenumber-for-php": "^8.9"
+    },
+    "require-dev": {
+        "craftcms/phpstan": "dev-main"
     },
     "autoload": {
         "psr-4": {
@@ -39,5 +44,14 @@
         "class": "rynpsc\\phonenumber\\PhoneNumber",
         "changelogUrl": "https://raw.githubusercontent.com/rynpsc/craft-phone-number/master/CHANGELOG.md",
         "downloadUrl": "https://github.com/rynpsc/craft-phone-number/archive/master.zip"
+    },
+    "scripts": {
+        "phpstan": "phpstan analyse --memory-limit=1G"
+    },
+    "config": {
+        "allow-plugins": {
+            "yiisoft/yii2-composer": true,
+            "craftcms/plugin-installer": true
+        }
     }
 }
