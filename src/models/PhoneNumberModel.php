@@ -137,7 +137,7 @@ class PhoneNumberModel extends Model implements JsonSerializable
     /**
      * Returns the country code
      */
-    public function getCountryCode(): string
+    public function getCountryCode(): ?int
     {
         return $this->phoneNumberObject->getCountryCode();
     }
