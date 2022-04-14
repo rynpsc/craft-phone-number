@@ -147,10 +147,6 @@ class PhoneNumberModel extends Model implements JsonSerializable
      */
     public function getDescription(string $locale = null, string $region = null): ?string
     {
-        if (!$this->geoCoder) {
-            return null;
-        }
-
         if (!isset($locale)) {
             $locale = Craft::$app->language;
         }
