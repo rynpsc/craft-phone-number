@@ -20,9 +20,10 @@ class StringHelper extends \craft\helpers\StringHelper
      * Multibyte safe sub string replacement.
      *
      * @param string $string The string to replace
-     * @param mixed $replacement The replacement value
-     * @param mixed $start
-     * @param mixed $length
+     * @param string $replacement The replacement value
+     * @param int $start
+     * @param int $length
+     * @return string
      */
     public static function substrReplace(string $string, string $replacement, int $start, int $length): string
     {
