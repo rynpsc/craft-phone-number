@@ -3,6 +3,7 @@
 ## 2.0.0 - 2022-05-04
 
 ### Added
+
 - Added `formatForCountry` method
 - Added `formatForMobileDialing` method
 - Added `getCarrierName` method
