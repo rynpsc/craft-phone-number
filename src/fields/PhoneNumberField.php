@@ -13,13 +13,13 @@ use rynpsc\phonenumber\models\PhoneNumberModel;
 use rynpsc\phonenumber\validators\PhoneNumberValidator;
 
 use Craft;
+use Locale;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
 use craft\helpers\ArrayHelper;
 use craft\helpers\Json;
 use libphonenumber\PhoneNumberUtil;
-use yii\db\Schema;
 
 /**
  * Phone Number Field
@@ -30,10 +30,7 @@ use yii\db\Schema;
  */
 class PhoneNumberField extends Field implements PreviewableFieldInterface
 {
-    /**
-     * @var string|null
-     */
-    public $defaultRegion;
+    public ?string $defaultRegion;
 
     /**
      * @inheritdoc
@@ -46,15 +43,7 @@ class PhoneNumberField extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function getContentColumnType(): string
-    {
-        return Schema::TYPE_STRING;
-    }
-
-    /**
-     * @inheritdoc
-     */
-    public function normalizeValue($value, ElementInterface $element = null)
+    public function normalizeValue(mixed $value, ?\craft\base\ElementInterface $element = null): mixed
     {
         if ($value instanceof PhoneNumberModel) {
             return $value;
@@ -77,7 +66,7 @@ class PhoneNumberField extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function serializeValue($value, ElementInterface $element = null)
+    public function serializeValue(mixed $value, ?\craft\base\ElementInterface $element = null): ?string
     {
         if (!is_object($value)) {
             return null;
@@ -89,7 +78,7 @@ class PhoneNumberField extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function getInputHtml($value, ElementInterface $element = null): string
+    public function getInputHtml(mixed $value, ?\craft\base\ElementInterface $element = null): string
     {
         $view = Craft::$app->getView();
 
@@ -112,7 +101,7 @@ class PhoneNumberField extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function getSettingsHtml()
+    public function getSettingsHtml(): ?string
     {
         return Craft::$app->getView()->renderTemplate('phone-number/_settings', [
             'field' => $this,
@@ -122,7 +111,7 @@ class PhoneNumberField extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function getTableAttributeHtml($value, ElementInterface $element): string
+    public function getTableAttributeHtml(mixed $value, ElementInterface $element): string
     {
         if (!$value) {
             return '';
@@ -134,9 +123,9 @@ class PhoneNumberField extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function getElementValidationRules() :array
+    public function getElementValidationRules(): array
     {
-        return $rules = [
+        return [
             PhoneNumberValidator::class,
         ];
     }
@@ -144,28 +133,22 @@ class PhoneNumberField extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function getContentGqlType()
+    public function getContentGqlType(): array|\GraphQL\Type\Definition\Type
     {
         return PhoneNumberType::getType();
     }
 
     /**
      * Get the regions and metadata
-     *
-     * @return array
      */
-    public function getRegionOptions()
+    public function getRegionOptions(): array
     {
         $regions = [];
         $language = Craft::$app->request->getPreferredLanguage();
         $supportedRegions = PhoneNumberUtil::getInstance()->getSupportedRegions();
 
         foreach ($supportedRegions as $region) {
-            if (Craft::$app->getI18n()->getIsIntlLoaded()) {
-                $label = \Locale::getDisplayRegion('-'.$region, $language);
-            } else {
-                $label = Craft::t('app', $region);
-            }
+            $label = Locale::getDisplayRegion('-' . $region, $language);
 
             $countryCode = PhoneNumberUtil::getInstance()->getCountryCodeForRegion($region);
 

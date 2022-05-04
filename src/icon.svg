@@ -1,33 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg width="100%" height="100%" viewBox="0 0 100 100" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:1.41421;">
-    <g transform="matrix(1,0,0,1,-110,-1.42109e-14)">
-        <g id="Phone-Number" serif:id="Phone Number" transform="matrix(1,0,0,1,-15,-15)">
-            <rect x="125" y="15" width="100" height="100" style="fill:none;"/>
-            <clipPath id="_clip1">
-                <rect x="125" y="15" width="100" height="100"/>
-            </clipPath>
-            <g clip-path="url(#_clip1)">
-                <g transform="matrix(1.03093,0,0,1.07527,8.50515,11.7742)">
-                    <path d="M210,49.5C210,23.836 188.268,3 161.5,3C134.732,3 113,23.836 113,49.5C113,75.164 134.732,96 161.5,96C188.268,96 210,75.164 210,49.5Z" style="fill:rgb(145,91,167);"/>
-                </g>
-                <g transform="matrix(0.666029,0,0,0.66599,171.212,39.3679)">
-                    <g id="Phone">
-                        <g>
-                            <g>
-                                <g transform="matrix(1,2.21828e-16,-2.21828e-16,1,-48.0007,-14.6154)">
-                                    <path d="M35.9,24.277L43.629,36.109C44.378,37.3 44.201,39.431 43.855,40.155C43.3,41.316 41.764,44.137 41.165,45.232C40.99,45.554 40.853,45.895 40.755,46.249C40.248,47.991 39.578,49.427 48.385,58.409L41.73,65.539C41.73,65.539 28.841,53.525 24.449,38.067C23.369,34.266 22.213,28.038 29.689,24.487C31.979,23.399 34.504,22.042 35.9,24.277Z" style="fill:white;"/>
-                                </g>
-                                <g transform="matrix(-1.60595e-16,-1,-1,1.60595e-16,58.7881,92.177)">
-                                    <g>
-                                        <path d="M35.9,24.277L43.629,36.109C44.378,37.3 44.201,39.431 43.855,40.155C43.3,41.316 41.764,44.137 41.165,45.232C40.99,45.554 40.853,45.895 40.755,46.249C40.248,47.991 39.578,49.427 48.385,58.409L41.73,65.539C41.73,65.539 28.841,53.525 24.449,38.067C23.369,34.266 22.213,28.038 29.689,24.487C31.979,23.399 34.504,22.042 35.9,24.277Z" style="fill:white;"/>
-                                    </g>
-                                </g>
-                            </g>
-                        </g>
-                    </g>
-                </g>
-            </g>
-        </g>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2" viewBox="0 0 100 100">
+  <defs>
+    <path id="reuse-0" d="M125 15h100v100H125z" style="fill:none"/>
+      <path id="reuse-1" d="m35.9 24.277 7.729 11.832c.749 1.191.572 3.322.226 4.046-.555 1.161-2.091 3.982-2.69 5.077a4.823 4.823 0 0 0-.41 1.017c-.507 1.742-1.177 3.178 7.63 12.16l-6.655 7.13S28.841 53.525 24.449 38.067c-1.08-3.801-2.236-10.029 5.24-13.58 2.29-1.088 4.815-2.445 6.211-.21Z" style="fill:#fff"/>
+  </defs>
+    <g transform="translate(-125 -15)">
+    <use xlink:href="#reuse-0" style="fill:none"/>
+        <clipPath id="a">
+      <use xlink:href="#reuse-0"/>
+    </clipPath>
+        <g clip-path="url(#a)">
+      <path d="M161 120.516C161 108.641 151.472 99 139.737 99H98.263C86.528 99 77 108.641 77 120.516v41.968C77 174.359 86.528 184 98.263 184h41.474c11.735 0 21.263-9.641 21.263-21.516v-41.968Z" style="fill:#2b6bd3" transform="matrix(1.19048 0 0 1.17647 33.333 -101.471)"/>
+            <use xlink:href="#reuse-1" style="fill:#fff" transform="matrix(.66603 0 0 .66599 139.242 29.634)"/>
+            <use xlink:href="#reuse-1" style="fill:#fff" transform="matrix(0 -.66599 -.66603 0 210.367 100.757)"/>
     </g>
+  </g>
 </svg>

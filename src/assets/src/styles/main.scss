@@ -1,4 +1,4 @@
-@import "node_modules/craftcms-sass/mixins";
+@import "node_modules/@craftcms/sass/mixins";
 
 $prefix: "rynpsc-phonenumber";
 
@@ -115,7 +115,8 @@ $prefix: "rynpsc-phonenumber";
 
 	&.is-selected,
 	&.is-highlighted {
-		@include menu-option-active-styles();
+        color: $menuOptionActiveColor;
+        background-color: $menuOptionActiveBackgroundColor;
         cursor: pointer;
 	}
 }
@@ -126,7 +127,6 @@ $prefix: "rynpsc-phonenumber";
 
 .#{$prefix}-code {
     @include margin-left(auto);
-    color: $mediumTextColor;
 }
 
 .#{$prefix}-no-results {

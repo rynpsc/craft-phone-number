@@ -1,5 +1,25 @@
 # Changelog
 
+## 2.0.0 2022-05-04
+
+### Added
+- Added `formatForCountry` method
+- Added `formatForMobileDialing` method
+- Added `getCarrierName` method
+- Added `getExtension` method
+- Added `getTimeZones` method
+- Added `carrierName` to GraphQl type
+- Added `extension` to GraphQL type
+- Added `formatForCountry` to GraphQL type
+- Added `formatForMobileDialing` to GraphQL type
+- Added `format` to GraphQL type
+- Added `timezones` to GraphQL type
+- Added support for `locale` and `region` arguments to `description` GraphQL field 
+
+### Changed
+
+- Now requires Craft 4.
+
 ## 1.5.0 - 2021-05-01
 
 ### Added

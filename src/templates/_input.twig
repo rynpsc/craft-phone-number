@@ -1,7 +1,6 @@
 {% import "_includes/forms" as forms %}
 
 <div id="{{ id }}" class="rynpsc-phonenumber {{ element.getErrors(field.handle) ? 'has-errors' : '' }}">
-
     <div style="display: none;">
         {{ forms.selectField({
             id: id ~ "-region",
@@ -18,16 +17,13 @@
     </button>
 
     <div class="rynpsc-phonenumber-dropdown" id="{{ id ~ '-dropdown' }}">
-
         <div class="rynpsc-phonenumber-search">
-
             <label for="{{ id ~ '-search' }}" class="rynpsc-phonenumber-assistive">Filter regions</label>
 
             {{ forms.text({
                 id: id ~ "-search",
                 placeholder: "Filter regions"|t("phonenumber"),
             }) }}
-
         </div>
 
         <ul class="rynpsc-phonenumber-regions" id="{{ id ~ '-regions' }}">
@@ -43,7 +39,6 @@
         <div class="rynpsc-phonenumber-no-results" id="{{ id ~ '-no-results' }}">
             <p>{{ "No results"|t('phone-number') }}</p>
         </div>
-
     </div>
 
 	{{ forms.text({
@@ -55,5 +50,4 @@
 		value: value.number ?? null,
 		class: "rynpsc-phonenumber-number"
 	}) }}
-
 </div>

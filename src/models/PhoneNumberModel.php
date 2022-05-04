@@ -10,6 +10,7 @@ namespace rynpsc\phonenumber\models;
 use rynpsc\phonenumber\validators\PhoneNumberValidator;
 
 use Craft;
+use JsonSerializable;
 use Twig\Markup;
 use craft\base\Model;
 use craft\helpers\ArrayHelper;
@@ -17,6 +18,8 @@ use craft\helpers\Html;
 use craft\helpers\Template;
 use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberFormat;
+use libphonenumber\PhoneNumberToCarrierMapper;
+use libphonenumber\PhoneNumberToTimeZonesMapper;
 use libphonenumber\PhoneNumberUtil;
 use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
 
@@ -27,59 +30,38 @@ use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
  * @package Phone Number
  * @since 1.0
  */
-class PhoneNumberModel extends Model implements \JsonSerializable
+class PhoneNumberModel extends Model implements JsonSerializable
 {
-    /**
-     * @var string
-     */
-    public $number;
+    public string $number;
 
-    /**
-     * @var string
-     */
-    public $region;
+    public string $region;
 
-    /**
-     * @var PhoneNumber
-     */
-    private $phoneNumberObject;
+    private ?PhoneNumber $phoneNumberObject;
 
-    /**
-     * @var PhoneNumberUtil
-     */
-    private $phoneNumberUtil;
+    private PhoneNumberUtil $phoneNumberUtil;
 
-    /**
-     * @var PhoneNumberOfflineGeocoder
-     */
-    private $geoCoder;
+    private PhoneNumberOfflineGeocoder $geoCoder;
 
     /**
      * @inheritdoc
      */
-    public function __construct($number, $region, array $config = [])
+    public function __construct(string $number, ?string $region, array $config = [])
     {
         $this->phoneNumberUtil = PhoneNumberUtil::getInstance();
-
-        if (Craft::$app->getI18n()->getIsIntlLoaded()) {
-            $this->geoCoder = PhoneNumberOfflineGeocoder::getInstance();
-        }
+        $this->geoCoder = PhoneNumberOfflineGeocoder::getInstance();
 
         $this->number = $number;
         $this->region = $region;
 
         try {
             $this->phoneNumberObject = $this->phoneNumberUtil->parse($number, $region);
-        } catch(\Exception $e) {
+        } catch (\Exception $e) {
             // Continue
         }
 
         parent::__construct($config);
     }
 
-    /**
-     * @inheritdoc
-     */
     public function __toString()
     {
         return (string)$this->number;
@@ -88,9 +70,9 @@ class PhoneNumberModel extends Model implements \JsonSerializable
     /**
      * Formats a phone number in the specified format
      *
-     * @return string
+     * @param string|null $format
      */
-    public function format(string $format = null)
+    public function format(string $format = null): string
     {
         $formats = [
             'e164' => PhoneNumberFormat::E164,
@@ -110,44 +92,61 @@ class PhoneNumberModel extends Model implements \JsonSerializable
     }
 
     /**
-     * Returns the country code
+     * Formats a phone number for out-of-country dialing purposes.
      *
-     * @return string
+     * @param string|null $region The region where the call is being placed.
+     * @since 2.0.0
      */
-    public function getCountryCode()
+    public function formatForCountry(string $region = null): string
+    {
+        return $this
+            ->phoneNumberUtil
+            ->formatOutOfCountryCallingNumber($this->phoneNumberObject, $region);
+    }
+
+    /**
+     * Returns a number formatted in such a way that it can be dialed from a mobile phone in the specific region.
+     *
+     * @param string $region The region where the call is being placed.
+     * @param bool $format Whether the number should be returned with formatting symbols, such as spaces and dashes.
+     * @since 2.0.0
+     */
+    public function formatForMobileDialing(string $region, bool $format = true): string
+    {
+        return $this
+            ->phoneNumberUtil
+            ->formatNumberForMobileDialing($this->phoneNumberObject, $region, $format);
+    }
+
+    /**
+     * Gets the name of the carrier for the given phone number, in the language provided.
+     *
+     * @since 2.0.0
+     */
+    public function getCarrierName(string $locale = null): string
+    {
+        $mapper = PhoneNumberToCarrierMapper::getInstance();
+
+        if (!isset($locale)) {
+            $locale = Craft::$app->language;
+        }
+
+        return $mapper->getNameForNumber($this->phoneNumberObject, $locale);
+    }
+
+    /**
+     * Returns the country code
+     */
+    public function getCountryCode(): ?int
     {
         return $this->phoneNumberObject->getCountryCode();
     }
 
     /**
-     * Returns the region code
-     *
-     * @return string
+     * Returns the numbers' description (country or geographical area)
      */
-    public function getRegionCode()
+    public function getDescription(string $locale = null, string $region = null): ?string
     {
-        return $this->phoneNumberUtil->getRegionCodeForNumber($this->phoneNumberObject);
-    }
-
-    /**
-     * Returns the type of number
-     *
-     * @return int
-     */
-    public function getType()
-    {
-        return $this->phoneNumberUtil->getNumberType($this->phoneNumberObject);
-    }
-
-    /**
-     * Returns the numbers description (country or geographical area)
-     */
-    public function getDescription(string $locale = null, string $region = null)
-    {
-        if (!$this->geoCoder) {
-            return null;
-        }
-
         if (!isset($locale)) {
             $locale = Craft::$app->language;
         }
@@ -156,14 +155,23 @@ class PhoneNumberModel extends Model implements \JsonSerializable
     }
 
     /**
+     * Returns the extension for this phone number.
+     *
+     * @since 2.0.0
+     */
+    public function getExtension(): ?string
+    {
+        return $this->phoneNumberObject->getExtension();
+    }
+
+    /**
      * Generates a hyperlink tag formatted with the phone number
      *
      * @param array $attributes Attributes to apply to the hyperlink
-     * @return Markup|null The generated hyperlink
      */
-    public function getLink($attributes = [])
+    public function getLink(array $attributes = []): ?Markup
     {
-        if (is_null($this->phoneNumberObject)) {
+        if ($this->phoneNumberObject === null) {
             return null;
         }
 
@@ -180,9 +188,37 @@ class PhoneNumberModel extends Model implements \JsonSerializable
     }
 
     /**
+     * Returns the region code
+     */
+    public function getRegionCode(): string
+    {
+        return $this->phoneNumberUtil->getRegionCodeForNumber($this->phoneNumberObject);
+    }
+
+    /**
+     * Returns a list of time zones to which this phone number belongs.
+     *
+     * @since 2.0.0
+     */
+    public function getTimeZones(): array
+    {
+        $mapper = PhoneNumberToTimeZonesMapper::getInstance();
+
+        return $mapper->getTimeZonesForNumber($this->phoneNumberObject);
+    }
+
+    /**
+     * Returns the type of number
+     */
+    public function getType(): int
+    {
+        return $this->phoneNumberUtil->getNumberType($this->phoneNumberObject);
+    }
+
+    /**
      * @inheritdoc
      */
-    public function rules()
+    public function rules(): array
     {
         return [
             [['number'], PhoneNumberValidator::class],
@@ -190,9 +226,7 @@ class PhoneNumberModel extends Model implements \JsonSerializable
     }
 
     /**
-     * Specify data which should be serialized to JSON
-     *
-     * @return array
+     * @inheritdoc
      */
     public function jsonSerialize(): array
     {
