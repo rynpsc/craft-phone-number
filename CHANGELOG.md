@@ -1,6 +1,6 @@
 # Changelog
 
-## 2.0.0 2022-05-04
+## 2.0.0 - 2022-05-04
 
 ### Added
 - Added `formatForCountry` method
