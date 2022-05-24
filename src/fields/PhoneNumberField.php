@@ -30,7 +30,7 @@ use libphonenumber\PhoneNumberUtil;
  */
 class PhoneNumberField extends Field implements PreviewableFieldInterface
 {
-    public ?string $defaultRegion;
+    public ?string $defaultRegion = null;
 
     /**
      * @inheritdoc

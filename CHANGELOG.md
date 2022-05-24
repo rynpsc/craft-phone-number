@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Fixed issued when creating a new field ([#18](https://github.com/rynpsc/craft-phone-number/issues/18))
+
 ## 2.0.0 - 2022-05-04
 
 ### Added
