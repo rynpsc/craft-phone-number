@@ -9,6 +9,7 @@ namespace rynpsc\phonenumber;
 
 use rynpsc\phonenumber\fields\PhoneNumberField;
 use rynpsc\phonenumber\gql\types\PhoneNumberType;
+use rynpsc\phonenumber\services\PhoneNumber as PhoneNumberService;
 use rynpsc\phonenumber\twigextensions\PhoneNumberExtension;
 
 use Craft;
@@ -17,6 +18,7 @@ use craft\events\RegisterComponentTypesEvent;
 use craft\events\RegisterGqlTypesEvent;
 use craft\services\Fields;
 use craft\services\Gql;
+use craft\web\twig\variables\CraftVariable;
 use yii\base\Event;
 
 /**
@@ -29,11 +31,34 @@ use yii\base\Event;
 class PhoneNumber extends Plugin
 {
     /**
+     * @inerhitdoc
+     */
+    public static function config(): array
+    {
+        return [
+            'components' => [
+                'phoneNumber' => ['class' => PhoneNumberService::class],
+            ],
+        ];
+    }
+
+    /**
      * @inheritdoc
      */
     public function init(): void
     {
         parent::init();
+
+        Event::on(
+            CraftVariable::class,
+            CraftVariable::EVENT_INIT,
+            function(Event $event) {
+                /** @var CraftVariable $variable */
+                $variable = $event->sender;
+
+                $variable->set('phoneNumber', PhoneNumberService::class);
+            }
+        );
 
         Event::on(
             Fields::class,
