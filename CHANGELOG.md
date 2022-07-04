@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.1.0 - 2022-07-04
+
+- Added `craft.phoneNumber.getAllSupportedRegions` to output a list of countries and their respective calling codes.
+
 ## 2.0.1 - 2022-05-24
 
 - Fixed issued when creating a new field ([#18](https://github.com/rynpsc/craft-phone-number/issues/18))

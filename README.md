@@ -97,6 +97,18 @@ By default, only numbers entered in international format will be formatted. To f
 {{ entry.text|tel('GB') }}
 ````
 
+## Displaying a list of countries
+
+A list of countries and their respective calling codes can be retrieved using `craft.phoneNumber.getAllSupportedRegions()`.
+
+```twig
+{% for region in craft.phoneNumber.getAllSupportedRegions() %}
+    {{ region.callingCode }}
+    {{ region.countryName }}
+    {{ region.countryCode }}
+{% endfor %} 
+```
+
 ## Links
 
 Both the `getLink()` method and `tel` filter support setting the generated links content and HTML attributes.
