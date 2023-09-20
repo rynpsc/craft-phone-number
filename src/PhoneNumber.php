@@ -9,11 +9,15 @@ namespace rynpsc\phonenumber;
 
 use rynpsc\phonenumber\fields\PhoneNumberField;
 use rynpsc\phonenumber\gql\types\PhoneNumberType;
+use rynpsc\phonenumber\integrations\feedme\Field as FeedMeField;
 use rynpsc\phonenumber\services\PhoneNumber as PhoneNumberService;
 use rynpsc\phonenumber\twigextensions\PhoneNumberExtension;
 
 use Craft;
 use craft\base\Plugin;
+use craft\feedme\Plugin as FeedMe;
+use craft\feedme\events\RegisterFeedMeFieldsEvent;
+use craft\feedme\services\Fields as FeedMeFields;
 use craft\events\RegisterComponentTypesEvent;
 use craft\events\RegisterGqlTypesEvent;
 use craft\services\Fields;
@@ -75,6 +79,16 @@ class PhoneNumber extends Plugin
                 $event->types[] = PhoneNumberType::class;
             }
         );
+
+        if (class_exists(FeedMe::class)) {
+            Event::on(
+                FeedMeFields::class,
+                FeedMeFields::EVENT_REGISTER_FEED_ME_FIELDS,
+                function(RegisterFeedMeFieldsEvent $event) {
+                    $event->fields[] = FeedMeField::class;
+                }
+            );
+        }
 
         if (Craft::$app->getRequest()->getIsSiteRequest()) {
             Craft::$app->getView()->registerTwigExtension(new PhoneNumberExtension());
