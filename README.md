@@ -53,7 +53,7 @@ The Phone Number field provides an easy way of parsing, formatting, storing and 
 Numbers can be formatted in the following formats:
 
 | Format        | Example Output       |
-| :------------ | :--------------------|
+|:--------------|:---------------------|
 | e164          | +441174960123        |
 | rfc3966       | tel:+44-117-496-0123 |
 | national      | 0117 496 0123        |
@@ -65,23 +65,23 @@ The rfc3966 format is also available via the `tel` alias.
 
 Number types are returned as integers.
 
-| Value   | Type                 |
-| :------ | :------------------- |
-| 0       | Fixed line           |
-| 1       | Mobile               |
-| 2       | Fixed line or mobile |
-| 3       | Toll free            |
-| 4       | Premium rate         |
-| 5       | Shared cost          |
-| 6       | VOIP                 |
-| 7       | Personal number      |
-| 8       | Pager                |
-| 9       | UAN                  |
-| 10      | Unknown              |
-| 27      | Emergency            |
-| 28      | Voicemail            |
-| 29      | Short code           |
-| 30      | Standard rate        |
+| Value | Type                 |
+|:------|:---------------------|
+| 0     | Fixed line           |
+| 1     | Mobile               |
+| 2     | Fixed line or mobile |
+| 3     | Toll free            |
+| 4     | Premium rate         |
+| 5     | Shared cost          |
+| 6     | VOIP                 |
+| 7     | Personal number      |
+| 8     | Pager                |
+| 9     | UAN                  |
+| 10    | Unknown              |
+| 27    | Emergency            |
+| 28    | Voicemail            |
+| 29    | Short code           |
+| 30    | Standard rate        |
 
 ## Twig Filter
 
