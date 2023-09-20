@@ -1,5 +1,9 @@
 # Changelog
 
+## 2.2.0 - 2023-09-20
+
+- Added Feed Me integration.
+
 ## 2.1.0 - 2022-07-04
 
 - Added `craft.phoneNumber.getAllSupportedRegions` to output a list of countries and their respective calling codes.
