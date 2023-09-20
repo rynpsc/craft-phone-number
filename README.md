@@ -6,7 +6,7 @@ It's built on the excellent [libphonenumber-for-php](https://github.com/giggsey/
 
 ## Requirements
 
-This plugin requires Craft CMS 3.6.12 or later.
+This plugin requires Craft CMS 4.0.0 or later.
 
 ## Installation
 
