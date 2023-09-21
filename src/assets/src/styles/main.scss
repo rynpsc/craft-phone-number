@@ -1,10 +1,9 @@
-@import "node_modules/@craftcms/sass/mixins";
+@import "node_modules/craftcms-sass/mixins";
 
 $prefix: "rynpsc-phonenumber";
 
 .#{$prefix} {
     position: relative;
-    display: block;
     display: flex;
 }
 
@@ -33,17 +32,12 @@ $prefix: "rynpsc-phonenumber";
 .#{$prefix}-button {
     @include margin-right(7px);
     @include input-styles();
-
+    background-color: var(--white);
     display: flex;
 	align-items: center;
     appearance: none;
     width: 54px;
     padding: 6px 9px;
-
-    &:focus,
-    &.active {
-        @include input-focused-styles();
-    }
 
     &::-moz-focus-inner {
         border: 0;
@@ -60,18 +54,15 @@ $prefix: "rynpsc-phonenumber";
 
 .#{$prefix}-dropdown {
     @include shadow();
+    @include menu-styles;
 	position: fixed;
-    top: calc(100% + 7px);
     top: 12px;
     bottom: 12px;
     left: 12px;
     right: 12px;
-    z-index: 100;
 	display: none;
 	padding: 0;
 	overflow: hidden;
-    background-color: $white;
-    border-radius: $largeBorderRadius;
 
 	&.is-open {
 		display: block;
@@ -115,8 +106,8 @@ $prefix: "rynpsc-phonenumber";
 
 	&.is-selected,
 	&.is-highlighted {
-        color: $menuOptionActiveColor;
-        background-color: $menuOptionActiveBackgroundColor;
+        color: $white;
+        background-color: $grey500;
         cursor: pointer;
 	}
 }
