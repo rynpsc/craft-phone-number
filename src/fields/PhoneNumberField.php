@@ -7,19 +7,18 @@
 
 namespace rynpsc\phonenumber\fields;
 
-use rynpsc\phonenumber\assets\PhoneNumberAsset;
-use rynpsc\phonenumber\gql\types\PhoneNumberType;
-use rynpsc\phonenumber\models\PhoneNumberModel;
-use rynpsc\phonenumber\validators\PhoneNumberValidator;
-
 use Craft;
-use Locale;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\PreviewableFieldInterface;
 use craft\helpers\ArrayHelper;
 use craft\helpers\Json;
 use libphonenumber\PhoneNumberUtil;
+use Locale;
+use rynpsc\phonenumber\assets\PhoneNumberAsset;
+use rynpsc\phonenumber\gql\types\PhoneNumberType;
+use rynpsc\phonenumber\models\PhoneNumberModel;
+use rynpsc\phonenumber\validators\PhoneNumberValidator;
 
 /**
  * Phone Number Field

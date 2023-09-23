@@ -7,21 +7,20 @@
 
 namespace rynpsc\phonenumber\models;
 
-use rynpsc\phonenumber\validators\PhoneNumberValidator;
-
 use Craft;
-use JsonSerializable;
-use Twig\Markup;
 use craft\base\Model;
 use craft\helpers\ArrayHelper;
 use craft\helpers\Html;
 use craft\helpers\Template;
+use JsonSerializable;
+use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
 use libphonenumber\PhoneNumber;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberToCarrierMapper;
 use libphonenumber\PhoneNumberToTimeZonesMapper;
 use libphonenumber\PhoneNumberUtil;
-use libphonenumber\geocoding\PhoneNumberOfflineGeocoder;
+use rynpsc\phonenumber\validators\PhoneNumberValidator;
+use Twig\Markup;
 
 /**
  * Phone Number Model

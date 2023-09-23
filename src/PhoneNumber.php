@@ -7,22 +7,21 @@
 
 namespace rynpsc\phonenumber;
 
+use Craft;
+use craft\base\Plugin;
+use craft\events\RegisterComponentTypesEvent;
+use craft\events\RegisterGqlTypesEvent;
+use craft\feedme\events\RegisterFeedMeFieldsEvent;
+use craft\feedme\Plugin as FeedMe;
+use craft\feedme\services\Fields as FeedMeFields;
+use craft\services\Fields;
+use craft\services\Gql;
+use craft\web\twig\variables\CraftVariable;
 use rynpsc\phonenumber\fields\PhoneNumberField;
 use rynpsc\phonenumber\gql\types\PhoneNumberType;
 use rynpsc\phonenumber\integrations\feedme\Field as FeedMeField;
 use rynpsc\phonenumber\services\PhoneNumber as PhoneNumberService;
 use rynpsc\phonenumber\twigextensions\PhoneNumberExtension;
-
-use Craft;
-use craft\base\Plugin;
-use craft\feedme\Plugin as FeedMe;
-use craft\feedme\events\RegisterFeedMeFieldsEvent;
-use craft\feedme\services\Fields as FeedMeFields;
-use craft\events\RegisterComponentTypesEvent;
-use craft\events\RegisterGqlTypesEvent;
-use craft\services\Fields;
-use craft\services\Gql;
-use craft\web\twig\variables\CraftVariable;
 use yii\base\Event;
 
 /**

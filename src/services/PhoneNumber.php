@@ -3,10 +3,10 @@
 namespace rynpsc\phonenumber\services;
 
 use Craft;
-use Locale;
 use craft\base\Component;
 use craft\helpers\ArrayHelper;
 use libphonenumber\PhoneNumberUtil;
+use Locale;
 
 class PhoneNumber extends Component
 {

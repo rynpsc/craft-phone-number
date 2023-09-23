@@ -7,17 +7,16 @@
 
 namespace rynpsc\phonenumber\twigextensions;
 
-use rynpsc\phonenumber\helpers\StringHelper;
-
 use Craft;
-use Twig\Extension\AbstractExtension;
-use Twig\Markup;
-use Twig\TwigFilter;
 use craft\helpers\ArrayHelper;
 use craft\helpers\Html;
 use craft\helpers\Template;
 use libphonenumber\PhoneNumberFormat;
 use libphonenumber\PhoneNumberUtil;
+use rynpsc\phonenumber\helpers\StringHelper;
+use Twig\Extension\AbstractExtension;
+use Twig\Markup;
+use Twig\TwigFilter;
 
 /**
  * Phone Number Twig extension
