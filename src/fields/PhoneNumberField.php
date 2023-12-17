@@ -32,6 +32,11 @@ class PhoneNumberField extends Field implements PreviewableFieldInterface
     public ?string $defaultRegion = null;
 
     /**
+     * @var string
+     */
+    public string $previewFormat = 'none';
+
+    /**
      * @inheritdoc
      */
     public static function displayName(): string
@@ -110,18 +115,6 @@ class PhoneNumberField extends Field implements PreviewableFieldInterface
     /**
      * @inheritdoc
      */
-    public function getTableAttributeHtml(mixed $value, ElementInterface $element): string
-    {
-        if (!$value) {
-            return '';
-        }
-
-        return $value->getLink();
-    }
-
-    /**
-     * @inheritdoc
-     */
     public function getElementValidationRules(): array
     {
         return [
@@ -135,6 +128,33 @@ class PhoneNumberField extends Field implements PreviewableFieldInterface
     public function getContentGqlType(): array|\GraphQL\Type\Definition\Type
     {
         return PhoneNumberType::getType();
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getPreviewHtml(mixed $value, ElementInterface $element): string
+    {
+        if ($value instanceof PhoneNumberModel) {
+            return $value->format($this->previewFormat);
+        }
+
+        return parent::getPreviewHtml($value, $element);
+    }
+
+    /**
+     * Gets an array of preview options formatted to pass to a select field.
+     *
+     * @since 3.0.0
+     */
+    public function getPreviewFormatSettingsOptions(): array
+    {
+        return [
+            ['label' => Craft::t('phone-number', 'E164'), 'value' => 'e164'],
+            ['label' => Craft::t('phone-number', 'International'), 'value' => 'international'],
+            ['label' => Craft::t('phone-number', 'National'), 'value' => 'national'],
+            ['label' => Craft::t('phone-number', 'Unformatted'), 'value' => null],
+        ];
     }
 
     /**
@@ -161,6 +181,18 @@ class PhoneNumberField extends Field implements PreviewableFieldInterface
         ArrayHelper::multisort($regions, 'label');
 
         return $regions;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    protected function defineRules(): array
+    {
+        $rules = parent::defineRules();
+
+        $rules[] = [['previewFormat'], 'string', ];
+
+        return $rules;
     }
 
     /**
