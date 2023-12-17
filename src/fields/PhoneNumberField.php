@@ -11,15 +11,20 @@ use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\InlineEditableFieldInterface;
+use craft\db\QueryParam;
 use craft\helpers\ArrayHelper;
+use craft\helpers\Db;
 use craft\helpers\Html;
 use craft\helpers\Json;
+use Illuminate\Support\Collection;
 use libphonenumber\PhoneNumberUtil;
 use Locale;
 use rynpsc\phonenumber\assets\PhoneNumberAsset;
+use rynpsc\phonenumber\fields\conditions\PhoneNumberFieldConditionRule;
 use rynpsc\phonenumber\gql\types\PhoneNumberType;
 use rynpsc\phonenumber\models\PhoneNumberModel;
 use rynpsc\phonenumber\validators\PhoneNumberValidator;
+use yii\db\Schema;
 
 /**
  * Phone Number Field
@@ -40,6 +45,55 @@ class PhoneNumberField extends Field implements InlineEditableFieldInterface
     /**
      * @inheritdoc
      */
+    public static function dbType(): array|string
+    {
+        return [
+            'region' => Schema::TYPE_STRING,
+            'number' => Schema::TYPE_STRING,
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public static function queryCondition(array $instances, mixed $value, array &$params): ?array
+    {
+        if (!is_array($value)) {
+            return parent::queryCondition($instances, $value, $params);
+        }
+
+        $operator = QueryParam::extractOperator($value);
+
+        if ($operator === null) {
+            array_unshift($value, QueryParam::AND);
+        }
+
+        $param = QueryParam::parse($value);
+
+        $condition = [$param->operator];
+
+        /** @var array $values */
+        $values = $param->values;
+
+        if (array_is_list($values)) {
+            $values = Collection::make($values)->collapse()->toArray();
+        }
+
+        if (empty($values)) {
+            return null;
+        }
+
+        foreach ($values as $k => $v) {
+            $valueSql = static::valueSql($instances, $k);
+            $condition[] = Db::parseParam($valueSql, $v, columnType: Schema::TYPE_JSON);
+        }
+
+        return $condition;
+    }
+
+    /**
+     * @inheritdoc
+     */
     public static function displayName(): string
     {
         return Craft::t('phone-number', 'Phone Number');
@@ -48,7 +102,7 @@ class PhoneNumberField extends Field implements InlineEditableFieldInterface
     /**
      * @inheritdoc
      */
-    public function normalizeValue(mixed $value, ?\craft\base\ElementInterface $element = null): mixed
+    public function normalizeValue(mixed $value, ?ElementInterface $element = null): mixed
     {
         if ($value instanceof PhoneNumberModel) {
             return $value;
@@ -71,15 +125,6 @@ class PhoneNumberField extends Field implements InlineEditableFieldInterface
     /**
      * @inheritdoc
      */
-    public function serializeValue(mixed $value, ?\craft\base\ElementInterface $element = null): ?string
-    {
-        if (!is_object($value)) {
-            return null;
-        }
-
-        return Json::encode($value);
-    }
-
     public function inputHtml(mixed $value, ?ElementInterface $element, bool $inline): string
     {
         $view = Craft::$app->getView();
@@ -206,5 +251,13 @@ class PhoneNumberField extends Field implements InlineEditableFieldInterface
         }
 
         return parent::searchKeywords($keywords, $element);
+    }
+
+    /**
+     * @inerhitdoc
+     */
+    public function getElementConditionRuleType(): array|string|null
+    {
+        return PhoneNumberFieldConditionRule::class;
     }
 }
