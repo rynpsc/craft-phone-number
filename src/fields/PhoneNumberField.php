@@ -162,4 +162,20 @@ class PhoneNumberField extends Field implements PreviewableFieldInterface
 
         return $regions;
     }
+
+    /**
+     * @inerhitdoc
+     */
+    protected function searchKeywords(mixed $value, ElementInterface $element): string
+    {
+        $keywords = [];
+
+        if ($value instanceof PhoneNumberModel) {
+            $keywords[] = $value->number;
+            $keywords[] = $value->format('national');
+            $keywords[] = $value->format('international');
+        }
+
+        return parent::searchKeywords($keywords, $element);
+    }
 }

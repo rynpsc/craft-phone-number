@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- Add support keyword search.
+
 ## 2.2.0 - 2023-09-20
 
 - Added Feed Me integration.
