@@ -10,8 +10,9 @@ namespace rynpsc\phonenumber\fields;
 use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
-use craft\base\PreviewableFieldInterface;
+use craft\base\InlineEditableFieldInterface;
 use craft\helpers\ArrayHelper;
+use craft\helpers\Html;
 use craft\helpers\Json;
 use libphonenumber\PhoneNumberUtil;
 use Locale;
@@ -27,7 +28,7 @@ use rynpsc\phonenumber\validators\PhoneNumberValidator;
  * @package Phone Number
  * @since 1.0
  */
-class PhoneNumberField extends Field implements PreviewableFieldInterface
+class PhoneNumberField extends Field implements InlineEditableFieldInterface
 {
     public ?string $defaultRegion = null;
 
@@ -79,19 +80,15 @@ class PhoneNumberField extends Field implements PreviewableFieldInterface
         return Json::encode($value);
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function getInputHtml(mixed $value, ?\craft\base\ElementInterface $element = null): string
+    public function inputHtml(mixed $value, ?ElementInterface $element, bool $inline): string
     {
         $view = Craft::$app->getView();
 
-        $id = $view->formatInputId($this->handle);
+        $id = Html::id($this->handle);
         $namespace = Craft::$app->view->namespaceInputId($id);
 
         $view->registerAssetBundle(PhoneNumberAsset::class);
         $view->registerJs("new PhoneNumber('{$namespace}');");
-        Craft::$app->assetManager->getPublishedUrl('@rynpsc/phonenumber/assets/dist/flags/sprite.png', true);
 
         return $view->renderTemplate('phone-number/_input', [
             'element' => $element,

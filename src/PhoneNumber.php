@@ -17,6 +17,7 @@ use craft\feedme\services\Fields as FeedMeFields;
 use craft\services\Fields;
 use craft\services\Gql;
 use craft\web\twig\variables\CraftVariable;
+use rynpsc\phonenumber\assets\PhoneNumberAsset;
 use rynpsc\phonenumber\fields\PhoneNumberField;
 use rynpsc\phonenumber\gql\types\PhoneNumberType;
 use rynpsc\phonenumber\integrations\feedme\Field as FeedMeField;
@@ -51,6 +52,11 @@ class PhoneNumber extends Plugin
     public function init(): void
     {
         parent::init();
+
+        if (Craft::$app->getRequest()->getIsCpRequest()) {
+            $view = Craft::$app->getView();
+            $view->registerAssetBundle(PhoneNumberAsset::class);
+        }
 
         Event::on(
             CraftVariable::class,

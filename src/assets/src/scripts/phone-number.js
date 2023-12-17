@@ -56,6 +56,7 @@ export default function PhoneNumber(namespace) {
 		elems.dropdown.setAttribute('aria-expanded', true);
 		elems.dropdown.setAttribute('aria-haspopup', 'listbox');
 		elems.dropdown.setAttribute('aria-owns', elems.regions.id);
+        document.body.appendChild(elems.dropdown);
 
 		elems.search.setAttribute('aria-autocomplete', 'both');
 		elems.search.setAttribute('aria-controls', elems.regions.id);
@@ -231,12 +232,17 @@ export default function PhoneNumber(namespace) {
 	}
 
 	function open() {
+		let buttonRect = elems.button.getBoundingClientRect();
+		let dropdownRect = elems.dropdown.getBoundingClientRect();
+
 		elems.dropdown.classList.add('is-open');
 
-		const rect = elems.dropdown.getBoundingClientRect();
-		const displayAbove = rect.bottom + 20 > (window.innerHeight);
+		elems.dropdown.style.display = 'block';
+		elems.dropdown.style.top = `${window.scrollY + buttonRect.bottom + 7}px`;
+		elems.dropdown.style.bottom = 'auto';
+		elems.dropdown.style.left = `${window.scrollX + buttonRect.left}px`;
+		elems.dropdown.style.right = '`auto';
 
-		elems.dropdown.classList.toggle('above', displayAbove);
 		elems.button.setAttribute('aria-expanded', true);
 		elems.button.classList.add('active');
 		elems.search.focus();
@@ -251,10 +257,10 @@ export default function PhoneNumber(namespace) {
 
 	function close() {
 		elems.dropdown.classList.remove('is-open');
-		elems.dropdown.classList.remove('above');
 		elems.button.removeAttribute('aria-expanded');
 		elems.button.classList.remove('active');
 		elems.search.value = '';
+		elems.dropdown.setAttribute('style', 'display: none');
 
 		document.removeEventListener('keydown', handleKeydown, true);
 
