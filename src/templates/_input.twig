@@ -7,7 +7,10 @@
             label: "Region"|t("phone-number"),
             name: name ~ "[region]",
             value: value.region ?? field.defaultRegion ?? null,
-            options: field.getRegionOptions,
+            options: regions|map(region => {
+                value: region.countryCode,
+                label: region.countryName,
+            }),
         }) }}
     </div>
 
