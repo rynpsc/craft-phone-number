@@ -12,17 +12,15 @@ use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\InlineEditableFieldInterface;
 use craft\db\QueryParam;
-use craft\helpers\ArrayHelper;
 use craft\helpers\Db;
 use craft\helpers\Html;
 use craft\helpers\Json;
 use Illuminate\Support\Collection;
-use libphonenumber\PhoneNumberUtil;
-use Locale;
 use rynpsc\phonenumber\assets\PhoneNumberAsset;
 use rynpsc\phonenumber\fields\conditions\PhoneNumberFieldConditionRule;
 use rynpsc\phonenumber\gql\types\PhoneNumberType;
 use rynpsc\phonenumber\models\PhoneNumberModel;
+use rynpsc\phonenumber\PhoneNumber;
 use rynpsc\phonenumber\validators\PhoneNumberValidator;
 use yii\db\Schema;
 
@@ -135,12 +133,15 @@ class PhoneNumberField extends Field implements InlineEditableFieldInterface
         $view->registerAssetBundle(PhoneNumberAsset::class);
         $view->registerJs("new PhoneNumber('{$namespace}');");
 
+        $regions = PhoneNumber::getInstance()->getPhoneNumber()->getAllSupportedRegions();
+
         return $view->renderTemplate('phone-number/_input', [
             'element' => $element,
             'field' => $this,
             'id' => $id,
             'name' => $this->handle,
             'value' => $value,
+            'regions' => $regions,
         ]);
     }
 
@@ -149,8 +150,11 @@ class PhoneNumberField extends Field implements InlineEditableFieldInterface
      */
     public function getSettingsHtml(): ?string
     {
+        $regions = PhoneNumber::getInstance()->getPhoneNumber()->getAllSupportedRegions();
+
         return Craft::$app->getView()->renderTemplate('phone-number/_settings', [
             'field' => $this,
+            'regions' => $regions,
         ]);
     }
 
@@ -197,32 +201,6 @@ class PhoneNumberField extends Field implements InlineEditableFieldInterface
             ['label' => Craft::t('phone-number', 'National'), 'value' => 'national'],
             ['label' => Craft::t('phone-number', 'Unformatted'), 'value' => null],
         ];
-    }
-
-    /**
-     * Get the regions and metadata
-     */
-    public function getRegionOptions(): array
-    {
-        $regions = [];
-        $language = Craft::$app->request->getPreferredLanguage();
-        $supportedRegions = PhoneNumberUtil::getInstance()->getSupportedRegions();
-
-        foreach ($supportedRegions as $region) {
-            $label = Locale::getDisplayRegion('-' . $region, $language);
-
-            $countryCode = PhoneNumberUtil::getInstance()->getCountryCodeForRegion($region);
-
-            $regions[] = [
-                'code' => $countryCode,
-                'label' => $label,
-                'value' => $region,
-            ];
-        }
-
-        ArrayHelper::multisort($regions, 'label');
-
-        return $regions;
     }
 
     /**

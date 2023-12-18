@@ -99,4 +99,9 @@ class PhoneNumber extends Plugin
             Craft::$app->getView()->registerTwigExtension(new PhoneNumberExtension());
         }
     }
+
+    public function getPhoneNumber(): PhoneNumberService
+    {
+        return $this->get('phoneNumber');
+    }
 }

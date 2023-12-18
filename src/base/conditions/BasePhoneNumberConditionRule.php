@@ -4,14 +4,12 @@ namespace rynpsc\phonenumber\base\conditions;
 
 use Craft;
 use craft\base\conditions\BaseConditionRule;
-use craft\helpers\ArrayHelper;
 use craft\helpers\Cp;
 use craft\helpers\Db;
 use craft\helpers\Html;
 use craft\helpers\StringHelper;
 use craft\helpers\UrlHelper;
-use libphonenumber\PhoneNumberUtil;
-use Locale;
+use rynpsc\phonenumber\PhoneNumber;
 use yii\base\InvalidConfigException;
 
 abstract class BasePhoneNumberConditionRule extends BaseConditionRule
@@ -76,13 +74,15 @@ abstract class BasePhoneNumberConditionRule extends BaseConditionRule
                 'options' => $this->regionOperators(),
             ]);
 
+            $regions = PhoneNumber::getInstance()->getPhoneNumber()->getAllSupportedRegions();
+
             $html[] = Cp::selectizeHtml([
                 'id' => 'region',
                 'class' => 'flex-grow',
                 'name' => 'region',
                 'values' => $this->region,
                 'multi' => true,
-                'options' => $this->regionOptions(),
+                'options' => $regions->map(fn($region) => $region['countryName']),
             ]);
         }
 
@@ -133,29 +133,6 @@ abstract class BasePhoneNumberConditionRule extends BaseConditionRule
             self::OPERATOR_EMPTY => self::operatorLabel(self::OPERATOR_EMPTY),
             self::OPERATOR_NOT_EMPTY => self::operatorLabel(self::OPERATOR_NOT_EMPTY),
         ];
-    }
-
-    protected function regionOptions(): array
-    {
-        $regions = [];
-        $language = Craft::$app->request->getPreferredLanguage();
-        $supportedRegions = PhoneNumberUtil::getInstance()->getSupportedRegions();
-
-        foreach ($supportedRegions as $region) {
-            $label = Locale::getDisplayRegion('-' . $region, $language);
-
-            $countryCode = PhoneNumberUtil::getInstance()->getCountryCodeForRegion($region);
-
-            $regions[] = [
-                'code' => $countryCode,
-                'label' => $label,
-                'value' => $region,
-            ];
-        }
-
-        ArrayHelper::multisort($regions, 'label');
-
-        return $regions;
     }
 
     /**

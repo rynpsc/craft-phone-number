@@ -27,11 +27,11 @@
         </div>
 
         <ul class="rynpsc-phonenumber-regions" id="{{ id ~ '-regions' }}">
-            {% for region in field.getRegionOptions %}
-                <li class="rynpsc-phonenumber-region" id="{{ id ~ '-' ~ region.value }}" data-region="{{ region.value }}" data-code="{{ region.code }}">
-                    <span class="rynpsc-phonenumber-flag icon-{{ region.value }}"></span>
-                    <span class="rynpsc-phonenumber-country">{{ region.label }}</span>
-                    <span class="rynpsc-phonenumber-code">+{{ region.code }}</span>
+            {% for region in regions %}
+                <li class="rynpsc-phonenumber-region" id="{{ id ~ '-' ~ region.countryCode }}" data-region="{{ region.countryCode }}" data-code="{{ region.callingCode }}">
+                    <span class="rynpsc-phonenumber-flag icon-{{ region.countryCode }}"></span>
+                    <span class="rynpsc-phonenumber-country">{{ region.countryName }}</span>
+                    <span class="rynpsc-phonenumber-code">+{{ region.callingCode }}</span>
                 </li>
             {% endfor %}
         </ul>

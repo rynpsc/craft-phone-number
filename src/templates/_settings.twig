@@ -5,7 +5,10 @@
     name: "defaultRegion",
     label: "Default Country"|t("phonenumber"),
     value: field.defaultRegion,
-    options: field.getRegionOptions(),
+    options: regions|map(region => {
+        value: region.countryCode,
+        label: region.countryName,
+    }),
     errors: field.getErrors("defaultRegion"),
     instructions: "The default country to use when parsing phone numbers."|t("phonenumber"),
 }) }}

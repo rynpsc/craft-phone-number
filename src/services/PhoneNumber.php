@@ -4,13 +4,13 @@ namespace rynpsc\phonenumber\services;
 
 use Craft;
 use craft\base\Component;
-use craft\helpers\ArrayHelper;
+use Illuminate\Support\Collection;
 use libphonenumber\PhoneNumberUtil;
 use Locale;
 
 class PhoneNumber extends Component
 {
-    public function getAllSupportedRegions()
+    public function getAllSupportedRegions(): Collection
     {
         $regions = [];
         $language = Craft::$app->request->getPreferredLanguage();
@@ -28,8 +28,6 @@ class PhoneNumber extends Component
             ];
         }
 
-        ArrayHelper::multisort($regions, 'countryCode');
-
-        return $regions;
+        return Collection::make($regions)->sortBy('countryName');
     }
 }
