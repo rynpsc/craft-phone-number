@@ -230,8 +230,8 @@ class PhoneNumberModel extends Model implements JsonSerializable
     public function jsonSerialize(): array
     {
         return [
-            'number' => $this->number,
             'region' => $this->region,
+            'number' => $this->number,
         ];
     }
 }

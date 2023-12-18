@@ -33,6 +33,9 @@ use yii\db\Schema;
  */
 class PhoneNumberField extends Field implements InlineEditableFieldInterface
 {
+    /**
+     * @var string|null
+     */
     public ?string $defaultRegion = null;
 
     /**
