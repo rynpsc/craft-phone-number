@@ -199,10 +199,10 @@ class PhoneNumberField extends Field implements InlineEditableFieldInterface
     public function getPreviewFormatSettingsOptions(): array
     {
         return [
+            ['label' => Craft::t('phone-number', 'None'), 'value' => null],
             ['label' => Craft::t('phone-number', 'E164'), 'value' => 'e164'],
             ['label' => Craft::t('phone-number', 'International'), 'value' => 'international'],
             ['label' => Craft::t('phone-number', 'National'), 'value' => 'national'],
-            ['label' => Craft::t('phone-number', 'None'), 'value' => null],
         ];
     }
 
