@@ -138,7 +138,7 @@ class PhoneNumberField extends Field implements InlineEditableFieldInterface
 
         $regions = PhoneNumber::getInstance()->getPhoneNumber()->getAllSupportedRegions();
 
-        return $view->renderTemplate('phone-number/_input', [
+        return $view->renderTemplate('phone-number/_input.twig', [
             'element' => $element,
             'field' => $this,
             'id' => $id,
@@ -155,7 +155,7 @@ class PhoneNumberField extends Field implements InlineEditableFieldInterface
     {
         $regions = PhoneNumber::getInstance()->getPhoneNumber()->getAllSupportedRegions();
 
-        return Craft::$app->getView()->renderTemplate('phone-number/_settings', [
+        return Craft::$app->getView()->renderTemplate('phone-number/_settings.twig', [
             'field' => $this,
             'regions' => $regions,
         ]);
