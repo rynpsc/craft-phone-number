@@ -46,7 +46,7 @@ class PhoneNumberField extends Field implements InlineEditableFieldInterface
     /**
      * @inheritdoc
      */
-    public static function dbType(): array|string
+    public static function dbType(): array
     {
         return [
             'region' => Schema::TYPE_STRING,
