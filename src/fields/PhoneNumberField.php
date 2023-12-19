@@ -39,9 +39,9 @@ class PhoneNumberField extends Field implements InlineEditableFieldInterface
     public ?string $defaultRegion = null;
 
     /**
-     * @var string
+     * @var string|null
      */
-    public string $previewFormat = 'none';
+    public ?string $previewFormat = null;
 
     /**
      * @inheritdoc
