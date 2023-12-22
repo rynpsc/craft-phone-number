@@ -14,7 +14,7 @@
         }) }}
     </div>
 
-    <button class="rynpsc-phonenumber-button" id="{{ id ~ '-button' }}" type="button">
+    <button class="rynpsc-phonenumber-button" id="{{ id ~ '-button' }}" type="button" {{ static ? 'disabled' : '' }}>
         <span class="icon icon-{{ value.region ?? field.defaultRegion ?? null }}" id="{{ id ~ '-af' }}"></span>
         <span class="rynpsc-phonenumber-button-caret" aria-hidden="true">downangle</span>
     </button>
@@ -51,6 +51,7 @@
 		label: "Number"|t("phonenumber"),
 		name: name ~ "[number]",
 		value: value.number ?? null,
-		class: "rynpsc-phonenumber-number"
+		class: "rynpsc-phonenumber-number",
+        disabled: static,
 	}) }}
 </div>

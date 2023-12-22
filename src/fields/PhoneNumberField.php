@@ -123,10 +123,7 @@ class PhoneNumberField extends Field implements InlineEditableFieldInterface
         );
     }
 
-    /**
-     * @inheritdoc
-     */
-    public function inputHtml(mixed $value, ?ElementInterface $element, bool $inline): string
+    protected function internalInputHtml(mixed $value, ?ElementInterface $element, bool $static): string
     {
         $view = Craft::$app->getView();
 
@@ -145,7 +142,24 @@ class PhoneNumberField extends Field implements InlineEditableFieldInterface
             'name' => $this->handle,
             'value' => $value,
             'regions' => $regions,
+            'static' => $static,
         ]);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function inputHtml(mixed $value, ?ElementInterface $element, bool $inline): string
+    {
+        return $this->internalInputHtml(value: $value, element: $element, static: false);
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getStaticHtml(mixed $value, ElementInterface $element): string
+    {
+        return $this->internalInputHtml(value: $value, element: $element, static: true);
     }
 
     /**

@@ -39,8 +39,8 @@ $prefix: "rynpsc-phonenumber";
 	width: 54px;
 	padding: 6px 9px;
 
-	&:hover,
-	&.active {
+	&:hover:not(:disabled),
+	&.active:not(:disabled) {
 		background-color: var(--gray-050);
 	}
 
