@@ -33,74 +33,74 @@ use yii\base\Event;
  */
 class PhoneNumber extends Plugin
 {
-    /**
-     * @inerhitdoc
-     */
-    public static function config(): array
-    {
-        return [
-            'components' => [
-                'phoneNumber' => ['class' => PhoneNumberService::class],
-            ],
-        ];
-    }
+	/**
+	 * @inerhitdoc
+	 */
+	public static function config(): array
+	{
+		return [
+			'components' => [
+				'phoneNumber' => ['class' => PhoneNumberService::class],
+			],
+		];
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function init(): void
-    {
-        parent::init();
+	/**
+	 * @inheritdoc
+	 */
+	public function init(): void
+	{
+		parent::init();
 
-        if (Craft::$app->getRequest()->getIsCpRequest()) {
-            $view = Craft::$app->getView();
-            $view->registerAssetBundle(PhoneNumberAsset::class);
-        }
+		if (Craft::$app->getRequest()->getIsCpRequest()) {
+			$view = Craft::$app->getView();
+			$view->registerAssetBundle(PhoneNumberAsset::class);
+		}
 
-        Event::on(
-            CraftVariable::class,
-            CraftVariable::EVENT_INIT,
-            function(Event $event) {
-                /** @var CraftVariable $variable */
-                $variable = $event->sender;
+		Event::on(
+			CraftVariable::class,
+			CraftVariable::EVENT_INIT,
+			function(Event $event) {
+				/** @var CraftVariable $variable */
+				$variable = $event->sender;
 
-                $variable->set('phoneNumber', PhoneNumberService::class);
-            }
-        );
+				$variable->set('phoneNumber', PhoneNumberService::class);
+			}
+		);
 
-        Event::on(
-            Fields::class,
-            Fields::EVENT_REGISTER_FIELD_TYPES,
-            function(RegisterComponentTypesEvent $event) {
-                $event->types[] = PhoneNumberField::class;
-            }
-        );
+		Event::on(
+			Fields::class,
+			Fields::EVENT_REGISTER_FIELD_TYPES,
+			function(RegisterComponentTypesEvent $event) {
+				$event->types[] = PhoneNumberField::class;
+			}
+		);
 
-        Event::on(
-            Gql::class,
-            Gql::EVENT_REGISTER_GQL_TYPES,
-            function(RegisterGqlTypesEvent $event) {
-                $event->types[] = PhoneNumberType::class;
-            }
-        );
+		Event::on(
+			Gql::class,
+			Gql::EVENT_REGISTER_GQL_TYPES,
+			function(RegisterGqlTypesEvent $event) {
+				$event->types[] = PhoneNumberType::class;
+			}
+		);
 
-        if (class_exists(FeedMe::class)) {
-            Event::on(
-                FeedMeFields::class,
-                FeedMeFields::EVENT_REGISTER_FEED_ME_FIELDS,
-                function(RegisterFeedMeFieldsEvent $event) {
-                    $event->fields[] = FeedMeField::class;
-                }
-            );
-        }
+		if (class_exists(FeedMe::class)) {
+			Event::on(
+				FeedMeFields::class,
+				FeedMeFields::EVENT_REGISTER_FEED_ME_FIELDS,
+				function(RegisterFeedMeFieldsEvent $event) {
+					$event->fields[] = FeedMeField::class;
+				}
+			);
+		}
 
-        if (Craft::$app->getRequest()->getIsSiteRequest()) {
-            Craft::$app->getView()->registerTwigExtension(new PhoneNumberExtension());
-        }
-    }
+		if (Craft::$app->getRequest()->getIsSiteRequest()) {
+			Craft::$app->getView()->registerTwigExtension(new PhoneNumberExtension());
+		}
+	}
 
-    public function getPhoneNumber(): PhoneNumberService
-    {
-        return $this->get('phoneNumber');
-    }
+	public function getPhoneNumber(): PhoneNumberService
+	{
+		return $this->get('phoneNumber');
+	}
 }

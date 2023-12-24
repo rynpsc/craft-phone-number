@@ -8,21 +8,21 @@ use rynpsc\phonenumber\base\conditions\BasePhoneNumberConditionRule;
 
 class PhoneNumberFieldConditionRule extends BasePhoneNumberConditionRule implements FieldConditionRuleInterface
 {
-    use FieldConditionRuleTrait;
+	use FieldConditionRuleTrait;
 
-    /**
-     * @inheritdoc
-     */
-    protected function elementQueryParam(): mixed
-    {
-        return $this->paramValue();
-    }
+	/**
+	 * @inheritdoc
+	 */
+	protected function elementQueryParam(): mixed
+	{
+		return $this->paramValue();
+	}
 
-    /**
-     * @inheritdoc
-     */
-    protected function matchFieldValue($value): bool
-    {
-        return $this->matchValue($value);
-    }
+	/**
+	 * @inheritdoc
+	 */
+	protected function matchFieldValue($value): bool
+	{
+		return $this->matchValue($value);
+	}
 }

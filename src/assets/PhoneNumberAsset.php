@@ -18,26 +18,26 @@ use craft\web\assets\cp\CpAsset;
  */
 class PhoneNumberAsset extends AssetBundle
 {
-    /**
-     * @inheritdoc
-     */
-    public function init(): void
-    {
-        $this->sourcePath = "@rynpsc/phonenumber/assets/dist";
+	/**
+	 * @inheritdoc
+	 */
+	public function init(): void
+	{
+		$this->sourcePath = "@rynpsc/phonenumber/assets/dist";
 
-        $this->depends = [
-            CpAsset::class,
-        ];
+		$this->depends = [
+			CpAsset::class,
+		];
 
-        $this->css = [
-            'styles/main.css',
-            'styles/sprite.css',
-        ];
+		$this->css = [
+			'styles/main.css',
+			'styles/sprite.css',
+		];
 
-        $this->js = [
-            'scripts/main.js',
-        ];
+		$this->js = [
+			'scripts/main.js',
+		];
 
-        parent::init();
-    }
+		parent::init();
+	}
 }
