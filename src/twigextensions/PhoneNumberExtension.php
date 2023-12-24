@@ -1,6 +1,5 @@
 <?php
 /**
- * @link https://www.ryanpascoe.co
  * @copyright Copyright (c) Ryan Pascoe
  * @license MIT
  */
