@@ -11,9 +11,12 @@ use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\InlineEditableFieldInterface;
 use craft\db\QueryParam;
+use craft\gql\GqlEntityRegistry;
 use craft\helpers\Db;
 use craft\helpers\Html;
 use craft\helpers\Json;
+use GraphQL\Type\Definition\InputObjectType;
+use GraphQL\Type\Definition\Type;
 use Illuminate\Support\Collection;
 use rynpsc\phonenumber\assets\PhoneNumberAsset;
 use rynpsc\phonenumber\fields\conditions\PhoneNumberFieldConditionRule;
@@ -187,10 +190,67 @@ class PhoneNumberField extends Field implements InlineEditableFieldInterface
 	/**
 	 * @inheritdoc
 	 */
-	public function getContentGqlType(): array|\GraphQL\Type\Definition\Type
+	public function getContentGqlType(): Type|array
 	{
-		return PhoneNumberType::getType();
+        return PhoneNumberType::getType();
 	}
+
+    /**
+     * @inheritdoc
+     */
+    public function getContentGqlQueryArgumentType(): Type|array
+    {
+        $typeName = $this->handle . '_PhoneNumberQueryArgument';
+
+        return [
+            'name' => $this->handle,
+            'type' => GqlEntityRegistry::getOrCreate($typeName, fn() => new InputObjectType([
+                'name' => $typeName,
+                'fields' => [
+                    'region' => [
+                        'name' => 'region',
+                        'type' => Type::listOf(Type::string()),
+                        'description' => 'The region',
+                    ],
+                    'number' => [
+                        'name' => 'number',
+                        'type' => Type::listOf(Type::string()),
+                        'description' => 'The number',
+                    ],
+                ],
+            ])),
+        ];
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function getContentGqlMutationArgumentType(): Type|array
+    {
+        $typeName = $this->handle . '_PhoneNumberMutationArgument';
+
+        $type =  GqlEntityRegistry::getOrCreate($typeName, fn() => new InputObjectType([
+            'name' => $typeName,
+            'fields' => [
+                'region' => [
+                    'name' => 'region',
+                    'type' => Type::string(),
+                    'description' => 'The region',
+                ],
+                'number' => [
+                    'name' => 'number',
+                    'type' => Type::string(),
+                    'description' => 'The number',
+                ],
+            ],
+        ]));
+
+        return [
+            'name' => $this->handle,
+            'type' => $type,
+            'description' => $this->instructions,
+        ];
+    }
 
 	/**
 	 * @inheritdoc
@@ -226,7 +286,7 @@ class PhoneNumberField extends Field implements InlineEditableFieldInterface
 	{
 		$rules = parent::defineRules();
 
-		$rules[] = [['previewFormat'], 'string', ];
+		$rules[] = [['previewFormat'], 'string'];
 
 		return $rules;
 	}
