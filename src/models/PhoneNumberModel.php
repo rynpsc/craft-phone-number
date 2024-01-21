@@ -65,7 +65,53 @@ class PhoneNumberModel extends Model implements JsonSerializable
 		return (string)$this->number;
 	}
 
-	/**
+    /**
+     * Gets the name of the carrier for the given phone number, in the language provided.
+     *
+     * @since 2.0.0
+     */
+    public function getCarrierName(string $locale = null): string
+    {
+        $mapper = PhoneNumberToCarrierMapper::getInstance();
+
+        if (!isset($locale)) {
+            $locale = Craft::$app->language;
+        }
+
+        return $mapper->getNameForNumber($this->phoneNumberObject, $locale);
+    }
+
+    /**
+     * Returns the country code
+     */
+    public function getCountryCode(): ?int
+    {
+        return $this->phoneNumberObject->getCountryCode();
+    }
+
+    /**
+     * Returns the numbers' description (country or geographical area)
+     */
+    public function getDescription(string $locale = null, string $region = null): ?string
+    {
+        if (!isset($locale)) {
+            $locale = Craft::$app->language;
+        }
+
+        return $this->geoCoder->getDescriptionForNumber($this->phoneNumberObject, $locale, $region);
+    }
+
+    /**
+     * Returns the extension for this phone number.
+     *
+     * @since 2.0.0
+     */
+    public function getExtension(): ?string
+    {
+        return $this->phoneNumberObject->getExtension();
+    }
+
+    /**
 	 * Formats a phone number in the specified format
 	 *
 	 * @param string|null $format
@@ -106,60 +152,14 @@ class PhoneNumberModel extends Model implements JsonSerializable
 	 * Returns a number formatted in such a way that it can be dialed from a mobile phone in the specific region.
 	 *
 	 * @param string $region The region where the call is being placed.
-	 * @param bool $format Whether the number should be returned with formatting symbols, such as spaces and dashes.
+	 * @param bool $withFormatting Whether the number should be returned with formatting symbols, such as spaces and dashes.
 	 * @since 2.0.0
 	 */
-	public function formatForMobileDialing(string $region, bool $format = true): string
+	public function formatForMobileDialing(string $region, bool $withFormatting = true): string
 	{
 		return $this
 			->phoneNumberUtil
-			->formatNumberForMobileDialing($this->phoneNumberObject, $region, $format);
-	}
-
-	/**
-	 * Gets the name of the carrier for the given phone number, in the language provided.
-	 *
-	 * @since 2.0.0
-	 */
-	public function getCarrierName(string $locale = null): string
-	{
-		$mapper = PhoneNumberToCarrierMapper::getInstance();
-
-		if (!isset($locale)) {
-			$locale = Craft::$app->language;
-		}
-
-		return $mapper->getNameForNumber($this->phoneNumberObject, $locale);
-	}
-
-	/**
-	 * Returns the country code
-	 */
-	public function getCountryCode(): ?int
-	{
-		return $this->phoneNumberObject->getCountryCode();
-	}
-
-	/**
-	 * Returns the numbers' description (country or geographical area)
-	 */
-	public function getDescription(string $locale = null, string $region = null): ?string
-	{
-		if (!isset($locale)) {
-			$locale = Craft::$app->language;
-		}
-
-		return $this->geoCoder->getDescriptionForNumber($this->phoneNumberObject, $locale, $region);
-	}
-
-	/**
-	 * Returns the extension for this phone number.
-	 *
-	 * @since 2.0.0
-	 */
-	public function getExtension(): ?string
-	{
-		return $this->phoneNumberObject->getExtension();
+			->formatNumberForMobileDialing($this->phoneNumberObject, $region, $withFormatting);
 	}
 
 	/**

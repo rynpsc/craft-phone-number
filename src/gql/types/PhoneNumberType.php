@@ -91,8 +91,13 @@ class PhoneNumberType
 				'name' => 'formatForMobileDialing',
 				'type' => Type::string(),
 				'args' => [
-					'region' => Type::string(),
-					'format' => Type::boolean(),
+					'region' => [
+                        'type' => Type::string(),
+                    ],
+					'format' => [
+                        'type' => Type::boolean(),
+                        'defaultValue' => true,
+                    ],
 				],
 				'resolve' => function($source, $arguments) {
 					return $source->formatForMobileDialing(
