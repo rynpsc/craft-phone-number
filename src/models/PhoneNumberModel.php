@@ -65,53 +65,53 @@ class PhoneNumberModel extends Model implements JsonSerializable
 		return (string)$this->number;
 	}
 
-    /**
-     * Gets the name of the carrier for the given phone number, in the language provided.
-     *
-     * @since 2.0.0
-     */
-    public function getCarrierName(string $locale = null): string
-    {
-        $mapper = PhoneNumberToCarrierMapper::getInstance();
+	/**
+	 * Gets the name of the carrier for the given phone number, in the language provided.
+	 *
+	 * @since 2.0.0
+	 */
+	public function getCarrierName(string $locale = null): string
+	{
+		$mapper = PhoneNumberToCarrierMapper::getInstance();
 
-        if (!isset($locale)) {
-            $locale = Craft::$app->language;
-        }
+		if (!isset($locale)) {
+			$locale = Craft::$app->language;
+		}
 
-        return $mapper->getNameForNumber($this->phoneNumberObject, $locale);
-    }
+		return $mapper->getNameForNumber($this->phoneNumberObject, $locale);
+	}
 
-    /**
-     * Returns the country code
-     */
-    public function getCountryCode(): ?int
-    {
-        return $this->phoneNumberObject->getCountryCode();
-    }
+	/**
+	 * Returns the country code
+	 */
+	public function getCountryCode(): ?int
+	{
+		return $this->phoneNumberObject->getCountryCode();
+	}
 
-    /**
-     * Returns the numbers' description (country or geographical area)
-     */
-    public function getDescription(string $locale = null, string $region = null): ?string
-    {
-        if (!isset($locale)) {
-            $locale = Craft::$app->language;
-        }
+	/**
+	 * Returns the numbers' description (country or geographical area)
+	 */
+	public function getDescription(string $locale = null, string $region = null): ?string
+	{
+		if (!isset($locale)) {
+			$locale = Craft::$app->language;
+		}
 
-        return $this->geoCoder->getDescriptionForNumber($this->phoneNumberObject, $locale, $region);
-    }
+		return $this->geoCoder->getDescriptionForNumber($this->phoneNumberObject, $locale, $region);
+	}
 
-    /**
-     * Returns the extension for this phone number.
-     *
-     * @since 2.0.0
-     */
-    public function getExtension(): ?string
-    {
-        return $this->phoneNumberObject->getExtension();
-    }
+	/**
+	 * Returns the extension for this phone number.
+	 *
+	 * @since 2.0.0
+	 */
+	public function getExtension(): ?string
+	{
+		return $this->phoneNumberObject->getExtension();
+	}
 
-    /**
+	/**
 	 * Formats a phone number in the specified format
 	 *
 	 * @param string|null $format

@@ -92,12 +92,12 @@ class PhoneNumberType
 				'type' => Type::string(),
 				'args' => [
 					'region' => [
-                        'type' => Type::string(),
-                    ],
+						'type' => Type::string(),
+					],
 					'format' => [
-                        'type' => Type::boolean(),
-                        'defaultValue' => true,
-                    ],
+						'type' => Type::boolean(),
+						'defaultValue' => true,
+					],
 				],
 				'resolve' => function($source, $arguments) {
 					return $source->formatForMobileDialing(

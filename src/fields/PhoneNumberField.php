@@ -192,65 +192,65 @@ class PhoneNumberField extends Field implements InlineEditableFieldInterface
 	 */
 	public function getContentGqlType(): Type|array
 	{
-        return PhoneNumberType::getType();
+		return PhoneNumberType::getType();
 	}
 
-    /**
-     * @inheritdoc
-     */
-    public function getContentGqlQueryArgumentType(): Type|array
-    {
-        $typeName = $this->handle . '_PhoneNumberQueryArgument';
+	/**
+	 * @inheritdoc
+	 */
+	public function getContentGqlQueryArgumentType(): Type|array
+	{
+		$typeName = $this->handle . '_PhoneNumberQueryArgument';
 
-        return [
-            'name' => $this->handle,
-            'type' => GqlEntityRegistry::getOrCreate($typeName, fn() => new InputObjectType([
-                'name' => $typeName,
-                'fields' => [
-                    'region' => [
-                        'name' => 'region',
-                        'type' => Type::listOf(Type::string()),
-                        'description' => 'The region',
-                    ],
-                    'number' => [
-                        'name' => 'number',
-                        'type' => Type::listOf(Type::string()),
-                        'description' => 'The number',
-                    ],
-                ],
-            ])),
-        ];
-    }
+		return [
+			'name' => $this->handle,
+			'type' => GqlEntityRegistry::getOrCreate($typeName, fn() => new InputObjectType([
+				'name' => $typeName,
+				'fields' => [
+					'region' => [
+						'name' => 'region',
+						'type' => Type::listOf(Type::string()),
+						'description' => 'The region',
+					],
+					'number' => [
+						'name' => 'number',
+						'type' => Type::listOf(Type::string()),
+						'description' => 'The number',
+					],
+				],
+			])),
+		];
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function getContentGqlMutationArgumentType(): Type|array
-    {
-        $typeName = $this->handle . '_PhoneNumberMutationArgument';
+	/**
+	 * @inheritdoc
+	 */
+	public function getContentGqlMutationArgumentType(): Type|array
+	{
+		$typeName = $this->handle . '_PhoneNumberMutationArgument';
 
-        $type =  GqlEntityRegistry::getOrCreate($typeName, fn() => new InputObjectType([
-            'name' => $typeName,
-            'fields' => [
-                'region' => [
-                    'name' => 'region',
-                    'type' => Type::string(),
-                    'description' => 'The region',
-                ],
-                'number' => [
-                    'name' => 'number',
-                    'type' => Type::string(),
-                    'description' => 'The number',
-                ],
-            ],
-        ]));
+		$type = GqlEntityRegistry::getOrCreate($typeName, fn() => new InputObjectType([
+			'name' => $typeName,
+			'fields' => [
+				'region' => [
+					'name' => 'region',
+					'type' => Type::string(),
+					'description' => 'The region',
+				],
+				'number' => [
+					'name' => 'number',
+					'type' => Type::string(),
+					'description' => 'The number',
+				],
+			],
+		]));
 
-        return [
-            'name' => $this->handle,
-            'type' => $type,
-            'description' => $this->instructions,
-        ];
-    }
+		return [
+			'name' => $this->handle,
+			'type' => $type,
+			'description' => $this->instructions,
+		];
+	}
 
 	/**
 	 * @inheritdoc
