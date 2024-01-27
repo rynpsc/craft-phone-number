@@ -27,7 +27,7 @@
     "require": {
         "php": "^8.2",
         "ext-intl": "*",
-        "craftcms/cms": "^5.0.x-dev",
+        "craftcms/cms": "^5.0.0-alpha.3",
         "giggsey/libphonenumber-for-php": "^8.9"
     },
     "require-dev": {
