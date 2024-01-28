@@ -1,10 +1,10 @@
+<img alt="Phone Number icon" height="100" src="src/icon.svg" width="100"/>
+
 # Phone Number
 
-This plugin adds a new fieldtype to Craft for entering and validating international phone numbers, and getting information about those numbers.
+This plugin adds a new fieldtype to Craft for entering and validating international phone numbers, and getting information about those numbers. A Twig extension is also provided for extracting numbers from text.
 
-A Twig extension for extracting numbers from text.
-
-It's built on the excellent [libphonenumber-for-php](https://github.com/giggsey/libphonenumber-for-php) port of Google's [libphonenumber](https://github.com/google/libphonenumber) library. 
+It's built upon on the excellent [libphonenumber-for-php](https://github.com/giggsey/libphonenumber-for-php) port of Google's [libphonenumber](https://github.com/google/libphonenumber) library. 
 
 ![Screenshot](resources/phone-number-field.jpg)
 
@@ -46,10 +46,17 @@ composer require rynpsc/craft-phone-number
 
 The Phone Number field provides an easy way of parsing, formatting, storing and validating international phone numbers.
 
-
 ### Working with Phone Number Field Data
 
 The Phone Number field returns a PhoneNumberModel.
+
+When calling any of the below make sure to first check that the field value isn't null. This check is omitted for brevity in the examples.
+
+```twig
+{% if entry.fieldHandle %}
+  {{ entry.fieldHandle.region }}
+{% endif %}
+```
 
 #### region
 
@@ -138,6 +145,14 @@ If `region` is supplied, it will also be taken into consideration. If the phone 
 {{ entry.fieldHandle.getDescription('en-GB', 'US') }}
 ```
 
+##### getTimeZones()
+
+Returns an array of time zones to which a phone number belongs.
+
+```twig
+{{ entry.fieldHandle.getTimeZones() }}
+```
+
 ##### format(format)
 
 Formats a phone number.
@@ -162,7 +177,7 @@ The rfc3966 format is also available via the `tel` alias.
 Formats the phone number based on the `region`.
 
 ```twig
-{{ entry.fieldHandle.formatForCountry() }}
+{{ entry.fieldHandle.formatForCountry('GB') }}
 ```
 
 ##### formatForMobileDialing(region, withFormatting)
@@ -203,9 +218,9 @@ If you have an element form, such as an [entry form](https://craftcms.com/knowle
 
 ```twig
 <select name="fields[fieldHandle][region]">
-    {% for region in craft.phoneNumber.getAllSupportedRegions() %}
-        <option value="{{ region.countryCode }}">{{ region.countryName }}</option>
-    {% endfor %} 
+  {% for region in craft.phoneNumber.getAllSupportedRegions() %}
+      <option value="{{ region.countryCode }}">{{ region.countryName }}</option>
+  {% endfor %} 
 </select>
 
 <input name="fields[fieldHandle][number]">
@@ -233,11 +248,11 @@ Attributes are set as per [`yii\helpers\BaseHtml::renderTagAttributes()`](https:
 
 ```twig
 {{ entry.phoneFieldHandle.getLink({
-    class: 'my-class'
+  class: 'my-class'
 }) }}
 
 {{ entry.textFieldHandle|tel(null, {
-    class: 'my-class'
+  class: 'my-class'
 }) }}
 ```
 
@@ -245,11 +260,11 @@ If `text` is included in the attributes argument, its value will be HTML-encoded
 
 ```twig
 {{ entry.phoneFieldHandle.getLink({
-    text: 'Content'
+  text: 'Content'
 }) }}
 
 {{ entry.textField|tel(null, {
-    text: 'Content'
+  text: 'Content'
 }) }}
 ```
 
@@ -257,10 +272,10 @@ If `html` is included in the attributes argument, its value will be set as the i
 
 ```twig
 {{ entry.phoneFieldHandle.getLink({
-    html: '<div>Content</div>'
+  html: '<div>Content</div>'
 }) }}
 
 {{ entry.textField|tel(null, {
-    html: '<div>Content</div>'
+  html: '<div>Content</div>'
 }) }}
 ```
