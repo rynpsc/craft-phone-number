@@ -1,17 +1,12 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2" viewBox="0 0 100 100">
-  <defs>
-    <path id="reuse-0" d="M125 15h100v100H125z" style="fill:none"/>
-      <path id="reuse-1" d="m35.9 24.277 7.729 11.832c.749 1.191.572 3.322.226 4.046-.555 1.161-2.091 3.982-2.69 5.077a4.823 4.823 0 0 0-.41 1.017c-.507 1.742-1.177 3.178 7.63 12.16l-6.655 7.13S28.841 53.525 24.449 38.067c-1.08-3.801-2.236-10.029 5.24-13.58 2.29-1.088 4.815-2.445 6.211-.21Z" style="fill:#fff"/>
-  </defs>
-    <g transform="translate(-125 -15)">
-    <use xlink:href="#reuse-0" style="fill:none"/>
-        <clipPath id="a">
-      <use xlink:href="#reuse-0"/>
+<svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" xml:space="preserve" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2">
+  <g transform="translate(-125 -15)">
+    <path style="fill:none" d="M125 15h100v100H125z"/>
+      <clipPath id="a">
+      <path d="M125 15h100v100H125z"/>
     </clipPath>
-        <g clip-path="url(#a)">
+      <g clip-path="url(#a)">
       <path d="M161 120.516C161 108.641 151.472 99 139.737 99H98.263C86.528 99 77 108.641 77 120.516v41.968C77 174.359 86.528 184 98.263 184h41.474c11.735 0 21.263-9.641 21.263-21.516v-41.968Z" style="fill:#2b6bd3" transform="matrix(1.19048 0 0 1.17647 33.333 -101.471)"/>
-            <use xlink:href="#reuse-1" style="fill:#fff" transform="matrix(.66603 0 0 .66599 139.242 29.634)"/>
-            <use xlink:href="#reuse-1" style="fill:#fff" transform="matrix(0 -.66599 -.66603 0 210.367 100.757)"/>
+      <path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64c0 247.4 200.6 448 448 448 18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368c-70.4-33.3-127.4-90.3-160.7-160.7l49.3-40.3c13.7-11.2 18.4-30 11.6-46.3l-40-96v-.1Z" style="fill:#fff;fill-rule:nonzero" transform="matrix(.08789 0 0 .08789 152.5 42.502)"/>
     </g>
   </g>
 </svg>
