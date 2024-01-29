@@ -15,4 +15,8 @@ return [
 	'Phone Number' => 'Phone Number',
 	'Region' => 'Region',
 	'The phone number provided is invalid.' => 'The phone number provided is invalid.',
+    'Default Country' => 'Default Country',
+    'Filter regions' => 'Filter regions',
+    'Preview Format' => 'Preview Format',
+    'The default country to use when parsing phone numbers.' => 'The default country to use when parsing phone numbers.',
 ];
