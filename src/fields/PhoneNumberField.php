@@ -102,6 +102,14 @@ class PhoneNumberField extends Field implements InlineEditableFieldInterface
 		return Craft::t('phone-number', 'Phone Number');
 	}
 
+    /**
+     * @inheritdoc
+     */
+    public static function icon(): string
+    {
+        return 'phone';
+    }
+
 	/**
 	 * @inheritdoc
 	 */
