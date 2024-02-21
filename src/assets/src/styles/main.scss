@@ -24,6 +24,10 @@ $prefix: "rynpsc-phonenumber";
 	display: inline-block;
 }
 
+.#{$prefix}-number {
+    max-width: 100%;
+}
+
 .#{$prefix}.has-errors .#{$prefix}-button,
 .#{$prefix}.has-errors .#{$prefix}-number {
 	border-color: $errorColor;
@@ -54,6 +58,7 @@ $prefix: "rynpsc-phonenumber";
 	@include margin-left(auto);
 	z-index: 1;
 	font-size: 14px;
+    margin-top: 3px;
 	display: block;
 }
 
