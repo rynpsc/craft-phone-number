@@ -2,7 +2,21 @@
 
 ## Unreleased
 
-- Add support keyword search.
+- Now requires Craft 5.
+- Added support for keyword search.
+- Added support for previewing fields in card views.
+- Added support for inline editing in element indexes.
+- Added support for querying fields by region and number.
+- Added support for element query conditions.
+- Added support for field condition rules.
+- Added support for GraphQL mutations.
+- Added the ability to control the preview format in element and card previews.
+- Improved styling
+- Changed to default region setting field to use selectize.
+- Added `\rynpsc\phonenumber\services\PhoneNumber::convertNumbersToLinks`.
+- Removed `\rynpsc\phonenumber\field\PhoneNumberField::getRegionOptions`,
+- Changed `\rynpsc\phonenumber\services\PhoneNumber::getAllSupportedRegions` to return a `Collection`.
+
 
 ## 2.2.0 - 2023-09-20
 
