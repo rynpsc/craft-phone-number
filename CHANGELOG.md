@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 3.0.0-beta.1 - 2024-02-21
 
 - Now requires Craft 5.
 - Added support for keyword search.
