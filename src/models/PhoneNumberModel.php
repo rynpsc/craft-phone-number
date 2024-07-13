@@ -60,6 +60,18 @@ class PhoneNumberModel extends Model implements JsonSerializable
 		parent::__construct($config);
 	}
 
+    /**
+     * @inheritdoc
+     */
+    public function defineRules(): array
+    {
+        $rules = parent::defineRules();
+
+        $rules[] = [['number'], PhoneNumberValidator::class];
+
+        return $rules;
+    }
+
 	public function __toString()
 	{
 		return (string)$this->number;
@@ -211,16 +223,6 @@ class PhoneNumberModel extends Model implements JsonSerializable
 	public function getType(): int
 	{
 		return $this->phoneNumberUtil->getNumberType($this->phoneNumberObject);
-	}
-
-	/**
-	 * @inheritdoc
-	 */
-	public function rules(): array
-	{
-		return [
-			[['number'], PhoneNumberValidator::class],
-		];
 	}
 
 	/**
