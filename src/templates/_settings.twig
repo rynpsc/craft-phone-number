@@ -1,11 +1,25 @@
-{% import "_includes/forms" as forms %}
+{% import "_includes/forms.twig" as forms %}
+
+{{ forms.selectizeField({
+    id: 'defaultRegion',
+    name: 'defaultRegion',
+    label: 'Default Country'|t('phonenumber'),
+    value: field.defaultRegion,
+    options: regions|map(region => {
+        value: region.countryCode,
+        label: region.countryName,
+    }),
+    errors: field.getErrors('defaultRegion'),
+    instructions: 'The default country to use when parsing phone numbers.'|t('phonenumber'),
+}) }}
 
 {{ forms.selectField({
-    id: "defaultRegion",
-    name: "defaultRegion",
-    label: "Default Country"|t("phonenumber"),
-    value: field.defaultRegion,
-    options: field.getRegionOptions(),
-    errors: field.getErrors("defaultRegion"),
-    instructions: "The default country to use when parsing phone numbers."|t("phonenumber"),
+    id: 'previewFormat',
+    name: 'previewFormat',
+    label: 'Preview Format'|t('phonenumber'),
+    value: field.previewFormat,
+    options: field.getPreviewFormatSettingsOptions(),
+    errors: field.getErrors('previewFormat'),
+    instructions: 'How field values will be formatted in element indexes and card views.'|t('phonenumber'),
 }) }}
+

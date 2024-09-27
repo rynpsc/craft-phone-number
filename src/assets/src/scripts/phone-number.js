@@ -56,6 +56,7 @@ export default function PhoneNumber(namespace) {
 		elems.dropdown.setAttribute('aria-expanded', true);
 		elems.dropdown.setAttribute('aria-haspopup', 'listbox');
 		elems.dropdown.setAttribute('aria-owns', elems.regions.id);
+        document.body.appendChild(elems.dropdown);
 
 		elems.search.setAttribute('aria-autocomplete', 'both');
 		elems.search.setAttribute('aria-controls', elems.regions.id);
@@ -230,13 +231,40 @@ export default function PhoneNumber(namespace) {
 		}
 	}
 
+    function position() {
+        elems.dropdown.style.maxHeight = '';
+        elems.dropdown.style.display = 'block';
+
+        let buttonRect = elems.button.getBoundingClientRect();
+        let dropdownRect = elems.dropdown.getBoundingClientRect();
+
+        let dropdownHeight = dropdownRect.height;
+        let viewportHeight = document.documentElement.clientHeight;
+
+        let top = '';
+        let bottom = '';
+        let maxHeight = '';
+
+        elems.dropdown.style.left = `${window.scrollX + buttonRect.left}px`;
+        elems.dropdown.style.right = '`auto';
+
+        if (buttonRect.bottom + dropdownHeight <= viewportHeight) {
+            top = `${window.scrollY + buttonRect.bottom + 8}px`;
+            maxHeight = `${viewportHeight - buttonRect.bottom - 16}px`;
+        } else {
+            bottom = `calc(100% - ${window.scrollY + buttonRect.top - 8}px)`;
+            maxHeight = `${buttonRect.top - 16}px`;
+        }
+
+        elems.dropdown.style.top = top;
+        elems.dropdown.style.bottom = bottom;
+        elems.dropdown.style.maxHeight = maxHeight;
+    }
+
 	function open() {
+        position();
+
 		elems.dropdown.classList.add('is-open');
-
-		const rect = elems.dropdown.getBoundingClientRect();
-		const displayAbove = rect.bottom + 20 > (window.innerHeight);
-
-		elems.dropdown.classList.toggle('above', displayAbove);
 		elems.button.setAttribute('aria-expanded', true);
 		elems.button.classList.add('active');
 		elems.search.focus();
@@ -244,6 +272,7 @@ export default function PhoneNumber(namespace) {
 		highlight(selectedIndex);
 		elems.noResults.classList.remove('is-visible');
 
+        window.addEventListener('resize', handleResize);
 		document.addEventListener('keydown', handleKeydown, true);
 
 		isOpen = true;
@@ -251,11 +280,12 @@ export default function PhoneNumber(namespace) {
 
 	function close() {
 		elems.dropdown.classList.remove('is-open');
-		elems.dropdown.classList.remove('above');
 		elems.button.removeAttribute('aria-expanded');
 		elems.button.classList.remove('active');
 		elems.search.value = '';
+		elems.dropdown.style.display = 'none';
 
+        window.removeEventListener('resize', handleResize);
 		document.removeEventListener('keydown', handleKeydown, true);
 
 		enableAllOptions();
@@ -265,4 +295,12 @@ export default function PhoneNumber(namespace) {
 	function toggle() {
 		return !isOpen ? open() : close();
 	}
+
+    function handleResize() {
+        if (!isOpen) {
+            return;
+        }
+
+        position();
+    }
 }

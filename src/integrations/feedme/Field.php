@@ -10,35 +10,35 @@ use rynpsc\phonenumber\fields\PhoneNumberField;
 
 class Field extends BaseField implements FieldInterface
 {
-    public static string $name = 'Phone Number';
+	public static string $name = 'Phone Number';
 
-    public static string $class = PhoneNumberField::class;
+	public static string $class = PhoneNumberField::class;
 
-    /**
-     * @inheritdoc
-     */
-    public function getMappingTemplate(): string
-    {
-        return 'phone-number/integrations/feedme/mapping-template';
-    }
+	/**
+	 * @inheritdoc
+	 */
+	public function getMappingTemplate(): string
+	{
+		return 'phone-number/integrations/feedme/mapping-template';
+	}
 
-    /**
-     * @inheritdoc
-     */
-    public function parseField(): mixed
-    {
-        $preppedData = [];
+	/**
+	 * @inheritdoc
+	 */
+	public function parseField(): mixed
+	{
+		$preppedData = [];
 
-        $fields = Hash::get($this->fieldInfo, 'fields');
+		$fields = Hash::get($this->fieldInfo, 'fields');
 
-        if (!$fields) {
-            return null;
-        }
+		if (!$fields) {
+			return null;
+		}
 
-        foreach ($fields as $subFieldHandle => $subFieldInfo) {
-            $preppedData[$subFieldHandle] = DataHelper::fetchValue($this->feedData, $subFieldInfo, $this->feed);
-        }
+		foreach ($fields as $subFieldHandle => $subFieldInfo) {
+			$preppedData[$subFieldHandle] = DataHelper::fetchValue($this->feedData, $subFieldInfo, $this->feed);
+		}
 
-        return $preppedData;
-    }
+		return $preppedData;
+	}
 }

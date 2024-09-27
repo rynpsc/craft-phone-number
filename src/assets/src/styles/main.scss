@@ -3,63 +3,71 @@
 $prefix: "rynpsc-phonenumber";
 
 .#{$prefix} {
-    position: relative;
-    display: flex;
+	position: relative;
+	display: flex;
 }
 
 .#{$prefix}-assistive {
-    border: 0;
-    clip: rect(0, 0, 0, 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    white-space: nowrap;
-    width: 1px;
+	border: 0;
+	clip: rect(0, 0, 0, 0);
+	height: 1px;
+	margin: -1px;
+	overflow: hidden;
+	padding: 0;
+	position: absolute;
+	white-space: nowrap;
+	width: 1px;
 }
 
 .#{$prefix}-flag {
-    @include margin-right(14px);
-    display: inline-block;
+	@include margin-right(14px);
+	display: inline-block;
+}
+
+.#{$prefix}-number {
+    width: 100%;
+    max-width: 25ch;
 }
 
 .#{$prefix}.has-errors .#{$prefix}-button,
 .#{$prefix}.has-errors .#{$prefix}-number {
-    border-color: $errorColor;
+	border-color: $errorColor;
 }
 
 .#{$prefix}-button {
-    @include margin-right(7px);
-    @include input-styles();
-    background-color: var(--white);
-    display: flex;
+	@include margin-right(7px);
+	@include input-styles();
+	background-color: var(--white);
+	display: flex;
 	align-items: center;
-    appearance: none;
-    width: 54px;
-    padding: 6px 9px;
+	appearance: none;
+	width: 60px;
+    flex-shrink: 0;
+	padding: 6px 9px;
 
-    &::-moz-focus-inner {
-        border: 0;
-    }
+	&:hover:not(:disabled),
+	&.active:not(:disabled) {
+		background-color: var(--gray-050);
+	}
+
+	&::-moz-focus-inner {
+		border: 0;
+	}
 }
 
 .#{$prefix}-button-caret {
-    @include icon;
-    @include margin-left(auto);
-    z-index: 1;
-    font-size: 14px;
-    display: block;
+	@include icon;
+	@include margin-left(auto);
+	z-index: 1;
+	font-size: 14px;
+    margin-top: 3px;
+	display: block;
 }
 
 .#{$prefix}-dropdown {
-    @include shadow();
-    @include menu-styles;
-	position: fixed;
-    top: 12px;
-    bottom: 12px;
-    left: 12px;
-    right: 12px;
+	@include shadow();
+	@include menu-styles;
+	position: absolute;
 	display: none;
 	padding: 0;
 	overflow: hidden;
@@ -70,27 +78,28 @@ $prefix: "rynpsc-phonenumber";
 
 	&:focus {
 		outline: 0;
-    }
+	}
 }
 
 .#{$prefix}-search {
-    padding: 14px;
-    border-bottom: 1px solid $hairlineColor;
+	padding: 14px;
+	border-bottom: 1px solid $hairlineColor;
 }
 
 .#{$prefix}-regions {
-    height: 100%;
+	height: 100%;
+	max-height: 252px;
 	overflow-y: scroll;
 	overscroll-behavior: contain;
 	position: relative;
-    scrollbar-color: $grey200 transparent;
+	scrollbar-color: $grey200 transparent;
 
 	&::-webkit-scrollbar {
 		width: 8px;
 	}
 
 	&::-webkit-scrollbar-thumb {
-        background: $grey200;
+		background: $grey200;
 	}
 }
 
@@ -106,18 +115,18 @@ $prefix: "rynpsc-phonenumber";
 
 	&.is-selected,
 	&.is-highlighted {
-        color: $white;
-        background-color: $grey500;
-        cursor: pointer;
+		color: $white;
+		background-color: $grey500;
+		cursor: pointer;
 	}
 }
 
 .#{$prefix}-country {
-    @include margin-right(7px);
+	@include margin-right(7px);
 }
 
 .#{$prefix}-code {
-    @include margin-left(auto);
+	@include margin-left(auto);
 }
 
 .#{$prefix}-no-results {
@@ -131,21 +140,7 @@ $prefix: "rynpsc-phonenumber";
 }
 
 @media only screen and (min-width: 673px) {
-    .#{$prefix}-dropdown {
-        position: absolute;
-        top: calc(100% + 7px);
-        bottom: auto;
-        left: 0;
-        right: auto;
-        min-width: 340px;
-    }
-
-    .#{$prefix}-dropdown.above {
-        top: auto;
-        bottom: calc(100% + 7px);
-    }
-
-    .#{$prefix}-regions {
-        max-height: 252px;
-    }
+	.#{$prefix}-dropdown {
+		min-width: 340px;
+	}
 }

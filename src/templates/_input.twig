@@ -1,4 +1,4 @@
-{% import "_includes/forms" as forms %}
+{% import "_includes/forms.twig" as forms %}
 
 <div id="{{ id }}" class="rynpsc-phonenumber {{ element.getErrors(field.handle) ? 'has-errors' : '' }}">
     <div style="display: none;">
@@ -7,11 +7,14 @@
             label: "Region"|t("phone-number"),
             name: name ~ "[region]",
             value: value.region ?? field.defaultRegion ?? null,
-            options: field.getRegionOptions,
+            options: regions|map(region => {
+                value: region.countryCode,
+                label: region.countryName,
+            }),
         }) }}
     </div>
 
-    <button class="rynpsc-phonenumber-button" id="{{ id ~ '-button' }}" type="button">
+    <button class="rynpsc-phonenumber-button" id="{{ id ~ '-button' }}" type="button" {{ static ? 'disabled' : '' }}>
         <span class="icon icon-{{ value.region ?? field.defaultRegion ?? null }}" id="{{ id ~ '-af' }}"></span>
         <span class="rynpsc-phonenumber-button-caret" aria-hidden="true">downangle</span>
     </button>
@@ -27,11 +30,11 @@
         </div>
 
         <ul class="rynpsc-phonenumber-regions" id="{{ id ~ '-regions' }}">
-            {% for region in field.getRegionOptions %}
-                <li class="rynpsc-phonenumber-region" id="{{ id ~ '-' ~ region.value }}" data-region="{{ region.value }}" data-code="{{ region.code }}">
-                    <span class="rynpsc-phonenumber-flag icon-{{ region.value }}"></span>
-                    <span class="rynpsc-phonenumber-country">{{ region.label }}</span>
-                    <span class="rynpsc-phonenumber-code">+{{ region.code }}</span>
+            {% for region in regions %}
+                <li class="rynpsc-phonenumber-region" id="{{ id ~ '-' ~ region.countryCode }}" data-region="{{ region.countryCode }}" data-code="{{ region.callingCode }}">
+                    <span class="rynpsc-phonenumber-flag icon-{{ region.countryCode }}"></span>
+                    <span class="rynpsc-phonenumber-country">{{ region.countryName }}</span>
+                    <span class="rynpsc-phonenumber-code">+{{ region.callingCode }}</span>
                 </li>
             {% endfor %}
         </ul>
@@ -44,10 +47,10 @@
 	{{ forms.text({
 		id: id ~ "-number",
         type: "tel",
-        size: 20,
 		label: "Number"|t("phonenumber"),
 		name: name ~ "[number]",
 		value: value.number ?? null,
-		class: "rynpsc-phonenumber-number"
+		class: "rynpsc-phonenumber-number",
+        disabled: static,
 	}) }}
 </div>
