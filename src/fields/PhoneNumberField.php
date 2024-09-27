@@ -10,6 +10,7 @@ use Craft;
 use craft\base\ElementInterface;
 use craft\base\Field;
 use craft\base\InlineEditableFieldInterface;
+use craft\base\MergeableFieldInterface;
 use craft\db\QueryParam;
 use craft\gql\GqlEntityRegistry;
 use craft\helpers\Db;
@@ -33,7 +34,7 @@ use yii\db\Schema;
  * @package Phone Number
  * @since 1.0
  */
-class PhoneNumberField extends Field implements InlineEditableFieldInterface
+class PhoneNumberField extends Field implements InlineEditableFieldInterface, MergeableFieldInterface
 {
 	/**
 	 * @var string|null
